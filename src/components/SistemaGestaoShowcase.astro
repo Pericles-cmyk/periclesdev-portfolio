@@ -1,0 +1,100 @@
+---
+const screens = [
+  {
+    src: '/projects/sistema-gestao/mesas.webp',
+    title: 'Mesas',
+    description: 'Acompanhamento visual da operação e status das mesas.',
+  },
+  {
+    src: '/projects/sistema-gestao/pedido.webp',
+    title: 'Pedidos',
+    description: 'Lançamento de itens, quantidades e observações.',
+  },
+  {
+    src: '/projects/sistema-gestao/pagamento.webp',
+    title: 'Pagamento',
+    description: 'Fechamento da comanda com diferentes formas de pagamento.',
+  },
+  {
+    src: '/projects/sistema-gestao/cardapio.webp',
+    title: 'Cardápio',
+    description: 'Produtos, categorias, preços e organização do catálogo.',
+  },
+  {
+    src: '/projects/sistema-gestao/historico.webp',
+    title: 'Histórico',
+    description: 'Consulta de movimentações e acompanhamento da operação.',
+  },
+]
+
+const highlights = [
+  ['01', 'Operação local', 'Funciona dentro do próprio estabelecimento e pode ser acessado pelos dispositivos conectados à mesma rede.'],
+  ['02', 'Personalização', 'Nome, logo, cores, cardápio, impressora e usuários podem ser configurados para cada cliente.'],
+  ['03', 'Tempo real', 'Alterações da operação são refletidas entre os dispositivos conectados durante o atendimento.'],
+  ['04', 'Instalação simplificada', 'O sistema é entregue com instalador próprio para Windows e preparado para uso no ambiente do cliente.'],
+]
+---
+<section class="management-case" aria-label="Sistema de Gestão">
+  <div class="management-case__hero">
+    <div class="management-case__intro">
+      <span class="portfolio-kicker">VISÃO DO PRODUTO</span>
+      <h2>Uma base de gestão preparada para diferentes operações.</h2>
+      <p>
+        O sistema concentra atendimento, pedidos, produção, pagamentos e administração
+        em uma única experiência, com configuração adaptável ao estabelecimento.
+      </p>
+    </div>
+
+    <figure class="management-case__main-shot">
+      <img
+        src="/projects/sistema-gestao/painel-admin.webp"
+        alt="Painel administrativo do Sistema de Gestão"
+        loading="eager"
+        decoding="async"
+      />
+      <figcaption>
+        <span>Painel administrativo</span>
+        <strong>Visão central da operação</strong>
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="management-highlights">
+    {highlights.map(([number, title, description]) => (
+      <article>
+        <span>{number}</span>
+        <h3>{title}</h3>
+        <p>{description}</p>
+      </article>
+    ))}
+  </div>
+
+  <div class="management-gallery">
+    {screens.map((screen) => (
+      <figure class="management-gallery__item">
+        <div>
+          <img
+            src={screen.src}
+            alt={screen.title}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <figcaption>
+          <h3>{screen.title}</h3>
+          <p>{screen.description}</p>
+        </figcaption>
+      </figure>
+    ))}
+  </div>
+
+  <section class="management-case__closing">
+    <span class="portfolio-kicker">EXPERIÊNCIA COMPLETA</span>
+    <h2>Do atendimento à administração.</h2>
+    <p>
+      A proposta é manter a operação simples para quem atende e, ao mesmo tempo,
+      oferecer ao responsável pelo estabelecimento controle sobre produtos, usuários,
+      pagamentos, histórico, impressão e configurações.
+    </p>
+  </section>
+</section>
