@@ -7,18 +7,19 @@ Portfólio oficial da **PericlesDev** — sistemas de gestão, plataformas de ag
 - React
 - TypeScript
 - Vite
-- Vercel Functions
+- Cloudflare Pages
+- Cloudflare Pages Functions
 - GitHub API
 
 ## Projetos públicos automáticos
 
-O endpoint `api/github-projects.ts` consulta os repositórios públicos de `Pericles-cmyk` e exibe somente os que possuem o topic:
+A Pages Function `functions/api/github-projects.js` consulta os repositórios públicos de `Pericles-cmyk` e exibe somente os que possuem o topic:
 
 ```text
 portfolio
 ```
 
-Para publicar um novo projeto no portfólio, basta adicionar o topic `portfolio` ao repositório no GitHub. O cache do endpoint é de 1 hora.
+Para publicar um novo projeto no portfólio, basta adicionar o topic `portfolio` ao repositório no GitHub. A resposta da Function usa cache no edge da Cloudflare.
 
 ## Cases privados
 
@@ -45,9 +46,40 @@ npm run dev
 npm run build
 ```
 
-## Deploy
+A saída do Vite é gerada em:
 
-Projeto preparado para Vercel. O token `GITHUB_TOKEN` é opcional e serve apenas para ampliar o limite da API pública do GitHub.
+```text
+dist/
+```
+
+## Cloudflare Pages
+
+Configuração recomendada ao conectar este repositório ao Cloudflare Pages:
+
+```text
+Production branch: main
+Build command: npm run build
+Build output directory: dist
+Root directory: /
+```
+
+A pasta `functions/` é reconhecida automaticamente pelo Cloudflare Pages e publica o endpoint:
+
+```text
+/api/github-projects
+```
+
+O secret `GITHUB_TOKEN` é opcional. Quando configurado no Cloudflare, aumenta o limite disponível da GitHub API.
+
+## Domínio
+
+Produção:
+
+```text
+https://periclesdev.com.br
+```
+
+O domínio deve ser vinculado ao projeto em **Cloudflare Pages → Custom domains**.
 
 ---
 
