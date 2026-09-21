@@ -984,3 +984,564 @@ footer small { font-size: 10px; }
     text-align: center;
   }
 }
+
+
+/* =========================================================
+   CASE JAZI LINO BEAUTY STUDIO
+========================================================= */
+
+.project-card--jazi {
+  background:
+    radial-gradient(circle at 100% 0%, rgba(184,101,127,.08), transparent 36%),
+    var(--surface);
+}
+
+.project-visual--jazi {
+  background: #fffaf8;
+  border-color: #eddde2;
+  color: #30252a;
+}
+
+.jazi-preview {
+  position: absolute;
+  inset: 0;
+  padding: 15px;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 12px;
+  background:
+    radial-gradient(circle at 84% 18%, rgba(231,166,183,.34), transparent 34%),
+    linear-gradient(135deg,#fff9fa,#f7e4e9);
+  color: #30252a;
+}
+
+.jazi-preview__nav {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 8px;
+  color: #77646b;
+  font-size: 6px;
+}
+
+.jazi-preview__nav span:last-child { text-align: right; }
+
+.jazi-preview__nav strong {
+  font-family: Georgia, 'Times New Roman', serif;
+  color: #71374d;
+  font-size: 10px;
+  letter-spacing: .06em;
+}
+
+.jazi-preview__hero {
+  display: grid;
+  grid-template-columns: 1.12fr .88fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.jazi-preview__hero > div:first-child {
+  display: grid;
+  gap: 7px;
+}
+
+.jazi-preview__hero small {
+  color: #b59158;
+  font-size: 5px;
+  font-weight: 800;
+  letter-spacing: .14em;
+}
+
+.jazi-preview__hero strong {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(13px, 1.55vw, 20px);
+  line-height: 1.02;
+}
+
+.jazi-preview__hero > div:first-child > span {
+  width: max-content;
+  padding: 6px 8px;
+  border-radius: 999px;
+  background: #b8657f;
+  color: #fff;
+  font-size: 6px;
+  font-weight: 800;
+}
+
+.jazi-preview__logo {
+  aspect-ratio: 1;
+  min-height: 98px;
+  border-radius: 48% 52% 46% 54% / 54% 42% 58% 46%;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 1px;
+  background: linear-gradient(145deg,#f2c2ce,#f9e8ec);
+  box-shadow: 0 14px 35px rgba(101,57,73,.13);
+  transform: rotate(2deg);
+}
+
+.jazi-preview__logo b {
+  color: #71374d;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 30px;
+  line-height: 1;
+}
+
+.jazi-preview__logo small {
+  color: #b59158;
+  font-size: 5px;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+
+.jazi-case-showcase {
+  margin: 56px 0 28px;
+  display: grid;
+  gap: 22px;
+}
+
+.jazi-case-browser {
+  overflow: hidden;
+  border: 1px solid #eddde2;
+  border-radius: 24px;
+  background: #fffaf8;
+  box-shadow: 0 24px 80px rgba(0,0,0,.24);
+}
+
+.jazi-case-browser__bar {
+  height: 46px;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: #fff;
+  border-bottom: 1px solid #eddde2;
+}
+
+.jazi-case-browser__bar span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ead1d9;
+}
+
+.jazi-case-browser__bar span:first-child { background: #b8657f; }
+
+.jazi-case-browser__bar b {
+  margin-left: 6px;
+  color: #77646b;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.jazi-site-shell {
+  color: #30252a;
+  background: #fffaf8;
+}
+
+.jazi-site-nav {
+  padding: 20px 32px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid rgba(181,145,88,.14);
+  color: #77646b;
+  font-size: 11px;
+}
+
+.jazi-site-nav > span:last-child { text-align: right; }
+
+.jazi-site-nav strong {
+  display: grid;
+  justify-items: center;
+  color: #71374d;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 18px;
+  letter-spacing: .05em;
+}
+
+.jazi-site-nav strong small {
+  color: #b59158;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 7px;
+  letter-spacing: .18em;
+}
+
+.jazi-site-hero {
+  min-height: 520px;
+  padding: 54px 32px;
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 50px;
+  align-items: center;
+  background:
+    radial-gradient(circle at 80% 22%,#f4ced7 0,transparent 34%),
+    linear-gradient(135deg,#fff9fa,#f7e4e9);
+}
+
+.jazi-site-hero__copy {
+  display: grid;
+  justify-items: start;
+  gap: 16px;
+}
+
+.jazi-site-hero__copy > small,
+.jazi-feature-card__tag {
+  color: #b59158;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+
+.jazi-site-hero__copy h3 {
+  max-width: 720px;
+  margin: 0;
+  color: #30252a;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(38px, 5vw, 68px);
+  font-weight: 500;
+  line-height: 1.03;
+  letter-spacing: -.04em;
+}
+
+.jazi-site-hero__copy p {
+  max-width: 610px;
+  margin: 0;
+  color: #77646b;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.jazi-site-actions,
+.jazi-site-badges {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.jazi-site-actions span {
+  padding: 11px 15px;
+  border: 1px solid rgba(48,37,42,.14);
+  border-radius: 999px;
+  background: rgba(255,255,255,.72);
+  color: #30252a;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.jazi-site-actions span:first-child {
+  border-color: #b8657f;
+  background: #b8657f;
+  color: #fff;
+}
+
+.jazi-site-badges {
+  margin-top: 8px;
+  color: #6f5b63;
+  font-size: 9px;
+}
+
+.jazi-site-logo-card {
+  width: min(380px, 92%);
+  aspect-ratio: 1;
+  justify-self: center;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 5px;
+  border-radius: 50% 50% 46% 54% / 54% 42% 58% 46%;
+  background: linear-gradient(145deg,#f2c2ce,#f9e8ec);
+  box-shadow: 0 22px 60px rgba(101,57,73,.13);
+  transform: rotate(2deg);
+}
+
+.jazi-site-logo-card strong {
+  color: #71374d;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 82px;
+  line-height: .9;
+}
+
+.jazi-site-logo-card span {
+  color: #71374d;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 20px;
+}
+
+.jazi-site-logo-card small {
+  color: #b59158;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .2em;
+}
+
+.jazi-case-grid {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 18px;
+}
+
+.jazi-feature-card {
+  min-height: 360px;
+  padding: 26px;
+  overflow: hidden;
+  border: 1px solid #eddde2;
+  border-radius: 24px;
+  background: #fff;
+  color: #30252a;
+  box-shadow: 0 16px 44px rgba(0,0,0,.11);
+}
+
+.jazi-feature-card--instagram {
+  background: linear-gradient(135deg,#fff7f9 0%,#f8e2e8 100%);
+}
+
+.jazi-feature-card--media {
+  background: linear-gradient(180deg,#2b2226,#20191c);
+  color: #fff;
+}
+
+.jazi-feature-card--care {
+  background: linear-gradient(120deg,#fff8fa 0%,#fff 48%,#fff7e8 100%);
+}
+
+.jazi-feature-card--admin {
+  grid-column: 1 / -1;
+  background: linear-gradient(145deg,#fff,#fff5f7);
+}
+
+.jazi-feature-card h3 {
+  margin: 8px 0 20px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 31px;
+  font-weight: 500;
+  line-height: 1.05;
+}
+
+.jazi-service-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 12px;
+}
+
+.jazi-service-mini {
+  overflow: hidden;
+  border: 1px solid #f1dce2;
+  border-radius: 18px;
+  background: #fff6f8;
+}
+
+.jazi-service-mini__media {
+  height: 150px;
+  background: linear-gradient(145deg,#f5dce3,#f0c7d2);
+}
+
+.jazi-service-mini__media--lash {
+  background: linear-gradient(145deg,#efd9df,#dba9b8);
+}
+
+.jazi-service-mini strong,
+.jazi-service-mini small {
+  display: block;
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+.jazi-service-mini strong {
+  padding-top: 13px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 14px;
+}
+
+.jazi-service-mini small {
+  padding-top: 5px;
+  padding-bottom: 14px;
+  color: #77646b;
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.jazi-instagram-phone {
+  width: min(230px, 100%);
+  min-height: 270px;
+  margin: 0 auto;
+  padding: 28px 18px 18px;
+  border: 7px solid #2f292c;
+  border-radius: 34px;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 9px;
+  position: relative;
+  background: #fff;
+  box-shadow: 0 18px 45px rgba(96,53,70,.12);
+}
+
+.jazi-instagram-island {
+  width: 72px;
+  height: 16px;
+  margin-bottom: 8px;
+  border-radius: 999px;
+  background: #171317;
+}
+
+.jazi-instagram-avatar {
+  width: 78px;
+  height: 78px;
+  display: grid;
+  place-items: center;
+  border: 4px solid #fff;
+  outline: 4px solid #b8657f;
+  border-radius: 50%;
+  background: #f6dce4;
+  color: #71374d;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 24px;
+}
+
+.jazi-instagram-phone strong { font-size: 12px; }
+.jazi-instagram-phone span { color: #77646b; font-size: 9px; text-align: center; }
+.jazi-instagram-phone b {
+  margin-top: 5px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: linear-gradient(90deg,#c97792,#b59158);
+  color: #fff;
+  font-size: 9px;
+}
+
+.jazi-media-row {
+  display: grid;
+  grid-template-columns: 1fr 140px;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.jazi-media-tile,
+.jazi-media-phone {
+  min-height: 210px;
+  border-radius: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 18px;
+}
+
+.jazi-media-tile {
+  background:
+    radial-gradient(circle at top right,rgba(231,166,183,.28),transparent 40%),
+    #3a2c32;
+}
+
+.jazi-media-phone {
+  border: 5px solid rgba(255,255,255,.16);
+  background: linear-gradient(180deg,#b8657f,#51343f);
+  align-items: center;
+  justify-content: center;
+}
+
+.jazi-media-row span { color: #e8b7c4; font-size: 9px; font-weight: 800; letter-spacing: .14em; }
+.jazi-media-row b { margin-top: 7px; font-size: 13px; color: #fff; }
+
+.jazi-care-list {
+  display: grid;
+  gap: 12px;
+}
+
+.jazi-care-list span {
+  padding: 16px;
+  border: 1px solid rgba(181,145,88,.25);
+  border-radius: 16px;
+  background: rgba(255,255,255,.72);
+  color: #67535b;
+  font-size: 12px;
+}
+
+.jazi-care-list b {
+  margin-right: 10px;
+  color: #b59158;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 18px;
+}
+
+.jazi-admin-layout {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  min-height: 250px;
+  overflow: hidden;
+  border: 1px solid #eadde1;
+  border-radius: 18px;
+  background: #fbf8f9;
+}
+
+.jazi-admin-sidebar {
+  padding: 18px;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  background: #2b2226;
+  color: #fff;
+}
+
+.jazi-admin-sidebar span {
+  padding: 10px 11px;
+  border-radius: 10px;
+  font-size: 10px;
+}
+
+.jazi-admin-sidebar span:nth-child(2) {
+  background: rgba(181,145,88,.2);
+  color: #f3d99a;
+}
+
+.jazi-admin-content {
+  padding: 24px;
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+
+.jazi-admin-content strong {
+  margin-bottom: 5px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 22px;
+  color: #71374d;
+}
+
+.jazi-admin-content span {
+  padding: 11px 12px;
+  border: 1px solid #eadde1;
+  border-radius: 11px;
+  background: #fff;
+  color: #77646b;
+  font-size: 10px;
+}
+
+@media (max-width: 760px) {
+  .jazi-preview__nav span { display: none; }
+  .jazi-preview__nav { grid-template-columns: 1fr; justify-items: center; }
+  .jazi-site-nav { padding: 16px 18px; grid-template-columns: 1fr; justify-items: center; }
+  .jazi-site-nav > span { display: none; }
+  .jazi-site-hero {
+    padding: 30px 18px;
+    min-height: auto;
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .jazi-site-hero__copy h3 { font-size: 40px; }
+  .jazi-site-logo-card { width: min(280px, 90%); }
+  .jazi-site-logo-card strong { font-size: 62px; }
+  .jazi-case-grid { grid-template-columns: 1fr; }
+  .jazi-feature-card--admin { grid-column: auto; }
+  .jazi-feature-card { min-height: auto; padding: 20px; }
+  .jazi-service-grid { grid-template-columns: 1fr; }
+  .jazi-media-row { grid-template-columns: 1fr; }
+  .jazi-media-phone { min-height: 180px; }
+  .jazi-admin-layout { grid-template-columns: 1fr; }
+  .jazi-admin-sidebar {
+    grid-template-columns: repeat(5,auto);
+    overflow-x: auto;
+  }
+}
