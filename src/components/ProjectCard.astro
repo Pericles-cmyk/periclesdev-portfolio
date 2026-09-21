@@ -1,0 +1,52 @@
+---
+import type { PortfolioProject } from '../data/projects'
+
+interface Props {
+  project: PortfolioProject
+}
+
+const { project } = Astro.props
+const detailUrl = project.kind === 'private' ? `/projetos/${project.slug}` : undefined
+---
+<article class="project-card" data-repo-url={project.repoUrl || ''}>
+  <a
+    class="project-visual"
+    href={detailUrl || project.liveUrl || project.repoUrl || '#'}
+    target={project.kind === 'public' ? '_blank' : undefined}
+    rel={project.kind === 'public' ? 'noreferrer' : undefined}
+    aria-label={`Abrir ${project.title}`}
+  >
+    <div class="project-visual__glow"></div>
+    <div class="project-browser">
+      <span></span><span></span><span></span>
+      <strong>{project.kind === 'private' ? 'CASE PRIVADO' : 'PROJETO PÚBLICO'}</strong>
+    </div>
+    <div class="project-mock-lines"><i></i><i></i><i></i><i></i></div>
+    <span class="project-placeholder">
+      {project.kind === 'private' ? 'Galeria do projeto' : 'Projeto no GitHub'}
+    </span>
+  </a>
+
+  <div class="project-card__head">
+    <div>
+      <span class="eyebrow">{project.category}</span>
+      <h3>{project.title}</h3>
+      <p class="project-subtitle">{project.subtitle}</p>
+    </div>
+    <span class:list={['status-pill', { 'status-pill--public': project.kind === 'public' }]}>
+      {project.kind === 'private' ? 'Código privado' : 'GitHub'}
+    </span>
+  </div>
+
+  <p class="project-description">{project.description}</p>
+
+  <div class="tech-list">
+    {project.stack.map((tech) => <span>{tech}</span>)}
+  </div>
+
+  <div class="project-actions">
+    {detailUrl && <a class="text-link" href={detailUrl}>Ver case →</a>}
+    {project.liveUrl && <a class="text-link" href={project.liveUrl} target="_blank" rel="noreferrer">Ver online ↗</a>}
+    {project.repoUrl && <a class="text-link" href={project.repoUrl} target="_blank" rel="noreferrer">GitHub ↗</a>}
+  </div>
+</article>
