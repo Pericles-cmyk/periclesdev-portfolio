@@ -6,6 +6,7 @@ import type { GithubProject, PortfolioProject } from './types/project'
 import './styles.css'
 
 const GITHUB_PROFILE = 'https://github.com/Pericles-cmyk'
+const BRAND_LOGO = 'https://raw.githubusercontent.com/Pericles-cmyk/Pericles-cmyk/main/assets/brand/periclesdev-header.png'
 const WHATSAPP = 'https://wa.me/5581994094491?text=Olá%20PericlesDev!%20Quero%20conversar%20sobre%20um%20projeto.'
 
 const solutions = [
@@ -121,7 +122,7 @@ function App() {
       </section>
 
       <section className="identity-strip section-narrow" aria-label="Identidade PericlesDev">
-        <img src="/brand/periclesdev-logo.png" alt="PericlesDev — Planejo, Desenvolvo, Transformo" />
+        <img src={BRAND_LOGO} alt="PericlesDev — Planejo, Desenvolvo, Transformo" />
       </section>
 
       <section className="section section--alt" id="solucoes">
@@ -225,7 +226,7 @@ function App() {
       </section>
 
       <footer>
-        <img src="/brand/periclesdev-logo.png" alt="PericlesDev" />
+        <img src={BRAND_LOGO} alt="PericlesDev" />
         <p>Desenvolvimento de sistemas, aplicações web e soluções digitais para negócios.</p>
         <div>
           <a href={GITHUB_PROFILE} target="_blank" rel="noreferrer">GitHub</a>
