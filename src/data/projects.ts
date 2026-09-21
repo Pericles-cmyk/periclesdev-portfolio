@@ -29,7 +29,7 @@ export const privateCases: PortfolioProject[] = [
     subtitle: 'Site e fluxo de agendamento',
     description:
       'Experiência de agendamento com consulta e cancelamento seguro, área administrativa, atualização em tempo real e integração com canais de contato.',
-    stack: ['Astro', 'Supabase', 'PostgreSQL', 'Realtime'],
+    stack: ['React', 'Vite', 'Supabase', 'PostgreSQL', 'Realtime'],
     category: 'Agendamento',
     kind: 'private',
     featured: true,
@@ -40,7 +40,7 @@ export const privateCases: PortfolioProject[] = [
     subtitle: 'Landing page comercial',
     description:
       'Página comercial responsiva para apresentação do studio, serviços, identidade visual e conversão por canais diretos de contato.',
-    stack: ['Astro', 'Cloudflare'],
+    stack: ['React', 'Vite', 'Vercel'],
     category: 'Landing page',
     kind: 'private',
     liveUrl: 'https://studiojazilino.periclesdev.com.br/',
