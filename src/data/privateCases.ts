@@ -47,10 +47,11 @@ export const curatedPublicFallback: PortfolioProject[] = [
     subtitle: 'Portfólio oficial da PericlesDev',
     description:
       'Portfólio responsivo com cases privados, projetos públicos sincronizados pela GitHub API e identidade visual própria da PericlesDev.',
-    stack: ['React', 'TypeScript', 'Vite', 'GitHub API', 'Vercel'],
+    stack: ['React', 'TypeScript', 'Vite', 'GitHub API', 'Cloudflare'],
     kind: 'public',
     category: 'Portfólio',
     repoUrl: 'https://github.com/Pericles-cmyk/periclesdev-portfolio',
+    liveUrl: 'https://periclesdev.com.br',
     featured: true,
   },
   {
