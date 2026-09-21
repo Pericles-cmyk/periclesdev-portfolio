@@ -1,37 +1,38 @@
 # PericlesDev Portfolio
 
-Portfólio oficial da **PericlesDev** — sistemas de gestão, plataformas de agendamento, landing pages e aplicações para negócios reais.
+Portfólio oficial da **PericlesDev** em **Astro**, otimizado para Cloudflare Workers.
 
-## Stack
+## Arquitetura
 
-- React
+- Astro estático
 - TypeScript
-- Vite
-- Cloudflare Pages
-- Cloudflare Pages Functions
-- GitHub API
+- CSS sem framework
+- JavaScript mínimo
+- Cloudflare Worker para `/api/github-projects`
+- GitHub API para projetos públicos
+- Static Assets da Cloudflare para o frontend
 
 ## Projetos públicos automáticos
 
-A Pages Function `functions/api/github-projects.js` consulta os repositórios públicos de `Pericles-cmyk` e exibe somente os que possuem o topic:
+O Worker consulta os repositórios públicos de `Pericles-cmyk` e retorna apenas os que possuem o topic:
 
 ```text
 portfolio
 ```
 
-Para publicar um novo projeto no portfólio, basta adicionar o topic `portfolio` ao repositório no GitHub. A resposta da Function usa cache no edge da Cloudflare.
+O próprio repositório `periclesdev-portfolio` é ignorado automaticamente.
 
 ## Cases privados
 
-Os projetos comerciais permanecem com o código-fonte privado. No portfólio aparecem apenas como **cases visuais**, com descrição, stack e screenshots autorizados.
-
-As imagens ficam organizadas em:
+Os projetos comerciais aparecem como cases visuais sem expor o código-fonte:
 
 ```text
-public/projects/sistema-gestao/
-public/projects/larissa-souza/
-public/projects/studio-jazi/
+/projetos/sistema-de-gestao
+/projetos/larissa-souza
+/projetos/studio-jazi-lino
 ```
+
+Screenshots aprovados podem ser adicionados em `public/projects/`.
 
 ## Desenvolvimento
 
@@ -46,43 +47,29 @@ npm run dev
 npm run build
 ```
 
-A saída do Vite é gerada em:
+A saída estática é gerada em:
 
 ```text
 dist/
 ```
 
-## Cloudflare Pages
+## Cloudflare
 
-Configuração recomendada ao conectar este repositório ao Cloudflare Pages:
+O `wrangler.toml` publica o conteúdo de `dist/` como Static Assets e executa o Worker somente para `/api/*`.
 
-```text
-Production branch: main
-Build command: npm run build
-Build output directory: dist
-Root directory: /
+Deploy:
+
+```bash
+npm run deploy
 ```
 
-A pasta `functions/` é reconhecida automaticamente pelo Cloudflare Pages e publica o endpoint:
-
-```text
-/api/github-projects
-```
-
-O secret `GITHUB_TOKEN` é opcional. Quando configurado no Cloudflare, aumenta o limite disponível da GitHub API.
-
-## Domínio
-
-Produção:
+Domínio oficial:
 
 ```text
 https://periclesdev.com.br
 ```
-
-O domínio deve ser vinculado ao projeto em **Cloudflare Pages → Custom domains**.
 
 ---
 
 **PericlesDev**  
-Planejo • Desenvolvo • Transformo  
-https://periclesdev.com.br
+Planejo • Desenvolvo • Transformo
