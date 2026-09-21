@@ -7,24 +7,47 @@ interface Props {
 
 const { project } = Astro.props
 const detailUrl = project.kind === 'private' ? `/projetos/${project.slug}` : undefined
+const isLarissa = project.slug === 'larissa-souza'
 ---
-<article class="project-card" data-repo-url={project.repoUrl || ''}>
+<article class:list={['project-card', { 'project-card--larissa': isLarissa }]} data-repo-url={project.repoUrl || ''}>
   <a
-    class="project-visual"
+    class:list={['project-visual', { 'project-visual--larissa': isLarissa }]}
     href={detailUrl || project.liveUrl || project.repoUrl || '#'}
     target={project.kind === 'public' ? '_blank' : undefined}
     rel={project.kind === 'public' ? 'noreferrer' : undefined}
     aria-label={`Abrir ${project.title}`}
   >
-    <div class="project-visual__glow"></div>
-    <div class="project-browser">
-      <span></span><span></span><span></span>
-      <strong>{project.kind === 'private' ? 'CASE PRIVADO' : 'PROJETO PÚBLICO'}</strong>
-    </div>
-    <div class="project-mock-lines"><i></i><i></i><i></i><i></i></div>
-    <span class="project-placeholder">
-      {project.kind === 'private' ? 'Galeria do projeto' : 'Projeto no GitHub'}
-    </span>
+    {isLarissa ? (
+      <div class="larissa-preview">
+        <div class="larissa-preview__top">
+          <span class="larissa-preview__brand">Larissa Souza<small>SOBRANCELHAS BP</small></span>
+          <span class="larissa-preview__nav">Serviços · Agendar · Consultar</span>
+        </div>
+        <div class="larissa-preview__body">
+          <div>
+            <small>BELEZA • PRECISÃO • AUTOESTIMA</small>
+            <strong>Seu olhar merece um cuidado <em>especial.</em></strong>
+            <span>Agendamento online</span>
+          </div>
+          <div class="larissa-preview__profile">
+            <span>LS</span>
+            <b>Larissa Souza ✓</b>
+          </div>
+        </div>
+      </div>
+    ) : (
+      <>
+        <div class="project-visual__glow"></div>
+        <div class="project-browser">
+          <span></span><span></span><span></span>
+          <strong>{project.kind === 'private' ? 'CASE PRIVADO' : 'PROJETO PÚBLICO'}</strong>
+        </div>
+        <div class="project-mock-lines"><i></i><i></i><i></i><i></i></div>
+        <span class="project-placeholder">
+          {project.kind === 'private' ? 'Galeria do projeto' : 'Projeto no GitHub'}
+        </span>
+      </>
+    )}
   </a>
 
   <div class="project-card__head">
