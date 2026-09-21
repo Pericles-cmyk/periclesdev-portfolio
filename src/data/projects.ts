@@ -67,7 +67,7 @@ export const curatedPublicProjects: PortfolioProject[] = [
     title: 'Sistema de Estacionamento — UniCesumar',
     subtitle: 'Projeto acadêmico público',
     description:
-      'Sistema de gerenciamento de estacionamento com implementação web e versão em Python.',
+      'Sistema acadêmico de gerenciamento de estacionamento com registro de entrada e saída por placa, cálculo automático de tarifas, métricas em tempo real, histórico diário e versão CLI em Python.',
     stack: ['HTML', 'CSS', 'JavaScript', 'Python'],
     category: 'Acadêmico',
     kind: 'public',
