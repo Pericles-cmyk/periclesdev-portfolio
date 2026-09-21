@@ -3,10 +3,13 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import ProjectCard from '../components/ProjectCard.astro'
+import PublicFeaturedProject from '../components/PublicFeaturedProject.astro'
 import { curatedPublicProjects, privateCases } from '../data/projects'
 
 const githubProfile = 'https://github.com/Pericles-cmyk'
 const whatsapp = 'https://wa.me/5581994094491?text=Olá%20PericlesDev!%20Quero%20conversar%20sobre%20um%20projeto.'
+const featuredPublicProject = curatedPublicProjects.find((project) => project.slug === 'unicesumar-parking')
+const publicProjectRows = curatedPublicProjects.filter((project) => project.slug !== 'unicesumar-parking')
 
 const capabilities = [
   ['Sistemas de gestão', 'Produtos para operação: pedidos, estoque, pagamentos, usuários, relatórios e rotinas internas.'],
@@ -143,8 +146,10 @@ const process = [
         <a class="portfolio-link" href={githubProfile} target="_blank" rel="noreferrer">Ver perfil completo ↗</a>
       </header>
 
+      {featuredPublicProject && <PublicFeaturedProject project={featuredPublicProject} />}
+
       <div class="public-project-list" data-github-grid>
-        {curatedPublicProjects.map((project) => (
+        {publicProjectRows.map((project) => (
           <article class="public-project-row" data-repo-url={project.repoUrl || ''}>
             <div>
               <span>{project.category}</span>
@@ -213,7 +218,7 @@ const process = [
     if (!grid) return
 
     const existing = new Set(
-      Array.from(grid.querySelectorAll<HTMLElement>('[data-repo-url]'))
+      Array.from(document.querySelectorAll<HTMLElement>('[data-repo-url]'))
         .map((element) => element.dataset.repoUrl)
         .filter(Boolean),
     )
