@@ -9,10 +9,28 @@ const { project } = Astro.props
 const detailUrl = project.kind === 'private' ? `/projetos/${project.slug}` : undefined
 const isLarissa = project.slug === 'larissa-souza'
 const isJazi = project.slug === 'studio-jazi-lino'
+const isParking = project.slug === 'unicesumar-parking'
 ---
-<article class:list={['project-card', { 'project-card--larissa': isLarissa, 'project-card--jazi': isJazi }]} data-repo-url={project.repoUrl || ''}>
+<article
+  class:list={[
+    'project-card',
+    {
+      'project-card--larissa': isLarissa,
+      'project-card--jazi': isJazi,
+      'project-card--parking': isParking,
+    },
+  ]}
+  data-repo-url={project.repoUrl || ''}
+>
   <a
-    class:list={['project-visual', { 'project-visual--larissa': isLarissa, 'project-visual--jazi': isJazi }]}
+    class:list={[
+      'project-visual',
+      {
+        'project-visual--larissa': isLarissa,
+        'project-visual--jazi': isJazi,
+        'project-visual--parking': isParking,
+      },
+    ]}
     href={detailUrl || project.liveUrl || project.repoUrl || '#'}
     target={project.kind === 'public' ? '_blank' : undefined}
     rel={project.kind === 'public' ? 'noreferrer' : undefined}
@@ -55,17 +73,43 @@ const isJazi = project.slug === 'studio-jazi-lino'
           </div>
         </div>
       </div>
+    ) : isParking ? (
+      <div class="parking-card-preview">
+        <div class="parking-card-preview__top">
+          <div>
+            <strong>UniCesumar Parking</strong>
+            <small>Painel de estacionamento</small>
+          </div>
+          <span>● Aberto</span>
+        </div>
+
+        <div class="parking-card-preview__metrics">
+          <div><small>No pátio</small><strong>12</strong></div>
+          <div><small>Saídas</small><strong>08</strong></div>
+          <div><small>Isentos</small><strong>03</strong></div>
+          <div><small>Receita</small><strong>R$ 42</strong></div>
+        </div>
+
+        <div class="parking-card-preview__content">
+          <div class="parking-card-preview__form">
+            <small>Entrada / saída</small>
+            <span>ABC1D23</span>
+            <div><b>Entrada</b><b>Saída</b></div>
+          </div>
+          <div class="parking-card-preview__chart">
+            <i style="--h:48%"></i>
+            <i style="--h:82%"></i>
+            <i style="--h:62%"></i>
+          </div>
+        </div>
+      </div>
     ) : (
       <>
         <div class="project-visual__glow"></div>
         <div class="project-browser">
           <span></span><span></span><span></span>
-          <strong>{project.kind === 'private' ? 'CASE PRIVADO' : 'PROJETO PÚBLICO'}</strong>
         </div>
         <div class="project-mock-lines"><i></i><i></i><i></i><i></i></div>
-        <span class="project-placeholder">
-          {project.kind === 'private' ? 'Galeria do projeto' : 'Projeto no GitHub'}
-        </span>
       </>
     )}
   </a>
@@ -76,9 +120,6 @@ const isJazi = project.slug === 'studio-jazi-lino'
       <h3>{project.title}</h3>
       <p class="project-subtitle">{project.subtitle}</p>
     </div>
-    <span class:list={['status-pill', { 'status-pill--public': project.kind === 'public' }]}>
-      {project.kind === 'private' ? 'Código privado' : 'GitHub'}
-    </span>
   </div>
 
   <p class="project-description">{project.description}</p>
@@ -88,8 +129,16 @@ const isJazi = project.slug === 'studio-jazi-lino'
   </div>
 
   <div class="project-actions">
-    {detailUrl && <a class="text-link" href={detailUrl}>Ver case →</a>}
-    {project.liveUrl && <a class="text-link" href={project.liveUrl} target="_blank" rel="noreferrer">Ver online ↗</a>}
-    {project.repoUrl && <a class="text-link" href={project.repoUrl} target="_blank" rel="noreferrer">GitHub ↗</a>}
+    {detailUrl && <a class="text-link" href={detailUrl}>Ver projeto →</a>}
+    {project.liveUrl && (
+      <a class="text-link" href={project.liveUrl} target="_blank" rel="noreferrer">
+        Visitar ↗
+      </a>
+    )}
+    {project.repoUrl && (
+      <a class="text-link text-link--secondary" href={project.repoUrl} target="_blank" rel="noreferrer">
+        Ver código ↗
+      </a>
+    )}
   </div>
 </article>
