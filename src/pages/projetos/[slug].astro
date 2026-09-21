@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro'
 import Header from '../../components/Header.astro'
 import Footer from '../../components/Footer.astro'
 import LarissaShowcase from '../../components/LarissaShowcase.astro'
+import JaziShowcase from '../../components/JaziShowcase.astro'
 import { privateCases, type PortfolioProject } from '../../data/projects'
 
 export function getStaticPaths() {
@@ -45,6 +46,8 @@ const { project } = Astro.props
 
     {project.slug === 'larissa-souza' ? (
       <LarissaShowcase />
+    ) : project.slug === 'studio-jazi-lino' ? (
+      <JaziShowcase />
     ) : (
       <section class="case-gallery" aria-label="Galeria do projeto">
         <div class="case-shot case-shot--desktop">
