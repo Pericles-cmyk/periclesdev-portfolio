@@ -53,16 +53,14 @@ img { max-width: 100%; }
   font-weight: 700;
   letter-spacing: -.02em;
 }
-.brand-mark {
-  width: 30px;
-  height: 30px;
-  display: grid;
-  place-items: center;
-  border-radius: 7px;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 800;
-  background: linear-gradient(135deg, var(--cyan), var(--blue));
+.brand-avatar {
+  width: 34px;
+  height: 34px;
+  display: block;
+  border-radius: 9px;
+  object-fit: cover;
+  border: 1px solid rgba(255,255,255,.12);
+  background: var(--surface-2);
 }
 .nav-links {
   display: flex;
@@ -160,17 +158,54 @@ img { max-width: 100%; }
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 34px;
   padding-left: 34px;
   border-left: 1px solid var(--line);
 }
-.portfolio-hero__monogram {
-  color: rgba(255,255,255,.04);
-  font-size: 146px;
-  font-weight: 800;
-  line-height: .8;
-  letter-spacing: -.09em;
-  user-select: none;
+.github-profile {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+  max-width: 300px;
 }
+.github-profile__avatar {
+  width: 176px;
+  height: 176px;
+  display: block;
+  object-fit: cover;
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: var(--surface);
+  box-shadow: 0 20px 60px rgba(0,0,0,.24);
+}
+.github-profile__identity {
+  display: grid;
+  gap: 3px;
+}
+.github-profile__identity strong {
+  color: #eef4fb;
+  font-size: 18px;
+  letter-spacing: -.02em;
+}
+.github-profile__identity span {
+  color: #657386;
+  font-size: 11px;
+}
+.github-profile__bio {
+  margin: 0;
+  max-width: 290px;
+  color: #97a4b5;
+  font-size: 12px;
+  line-height: 1.65;
+}
+.github-profile__link {
+  color: #718096;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.github-profile:hover .github-profile__link { color: var(--cyan); }
 .portfolio-hero__disciplines {
   display: grid;
   border-top: 1px solid var(--line);
@@ -599,11 +634,28 @@ footer a:hover { color: var(--cyan); }
   }
   .portfolio-hero__side {
     min-height: auto;
-    padding: 24px 0 0;
+    padding: 28px 0 0;
     border-left: 0;
     border-top: 1px solid var(--line);
   }
-  .portfolio-hero__monogram { display: none; }
+  .github-profile {
+    grid-template-columns: 96px 1fr;
+    column-gap: 18px;
+    align-items: center;
+    max-width: 560px;
+  }
+  .github-profile__avatar {
+    width: 96px;
+    height: 96px;
+    grid-row: 1 / span 3;
+    border-radius: 18px;
+  }
+  .github-profile__bio {
+    max-width: 440px;
+  }
+  .github-profile__link {
+    align-self: end;
+  }
   .portfolio-section__head,
   .portfolio-about__grid { grid-template-columns: 1fr; gap: 24px; }
   .project-grid--private { grid-template-columns: repeat(2,1fr); }
@@ -643,10 +695,27 @@ footer a:hover { color: var(--cyan); }
   .portfolio-section,
   footer,
   .case-page { width: min(100% - 40px, var(--content)); }
-  .portfolio-hero { padding: 58px 0 52px; }
+  .portfolio-hero { padding: 52px 0 44px; }
   .portfolio-hero h1 { font-size: 44px; }
   .portfolio-hero__copy > p { font-size: 16px; }
   .portfolio-hero__actions { align-items: flex-start; flex-direction: column; }
+  .github-profile {
+    grid-template-columns: 78px 1fr;
+    column-gap: 14px;
+    row-gap: 4px;
+  }
+  .github-profile__avatar {
+    width: 78px;
+    height: 78px;
+    border-radius: 15px;
+  }
+  .github-profile__identity strong { font-size: 16px; }
+  .github-profile__bio {
+    font-size: 11px;
+    line-height: 1.5;
+  }
+  .github-profile__link { display: none; }
+  .portfolio-hero__disciplines { margin-top: 4px; }
   .portfolio-section { padding: 72px 0; }
   .portfolio-section__head { margin-bottom: 34px; }
   .project-grid--private { grid-template-columns: 1fr; gap: 38px; }
