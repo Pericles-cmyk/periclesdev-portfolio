@@ -4,6 +4,7 @@ import Header from '../../components/Header.astro'
 import Footer from '../../components/Footer.astro'
 import LarissaShowcase from '../../components/LarissaShowcase.astro'
 import JaziShowcase from '../../components/JaziShowcase.astro'
+import SistemaGestaoShowcase from '../../components/SistemaGestaoShowcase.astro'
 import { privateCases, type PortfolioProject } from '../../data/projects'
 
 export function getStaticPaths() {
@@ -28,7 +29,7 @@ const { project } = Astro.props
   <main class="case-page">
     <section class="case-hero">
       <a class="back-link" href="/#projetos">← Voltar aos projetos</a>
-      <span class="eyebrow">PROJETO COMERCIAL · CÓDIGO-FONTE PRIVADO</span>
+      <span class="eyebrow">PROJETO COMERCIAL</span>
       <h1>{project.title}</h1>
       <p class="case-subtitle">{project.subtitle}</p>
       <p class="case-lead">{project.description}</p>
@@ -44,7 +45,9 @@ const { project } = Astro.props
       )}
     </section>
 
-    {project.slug === 'larissa-souza' ? (
+    {project.slug === 'sistema-de-gestao' ? (
+      <SistemaGestaoShowcase />
+    ) : project.slug === 'larissa-souza' ? (
       <LarissaShowcase />
     ) : project.slug === 'studio-jazi-lino' ? (
       <JaziShowcase />
@@ -63,8 +66,8 @@ const { project } = Astro.props
 
     <section class="case-meta">
       <div><span>Categoria</span><strong>{project.category}</strong></div>
-      <div><span>Entrega</span><strong>Solução personalizada</strong></div>
-      <div><span>Código-fonte</span><strong>Privado</strong></div>
+      <div><span>Projeto</span><strong>Solução personalizada</strong></div>
+      <div><span>Experiência</span><strong>Desktop e mobile</strong></div>
     </section>
   </main>
 
