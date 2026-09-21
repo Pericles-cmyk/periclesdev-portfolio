@@ -9,10 +9,30 @@ const githubProfile = 'https://github.com/Pericles-cmyk'
 const whatsapp = 'https://wa.me/5581994094491?text=Olá%20PericlesDev!%20Quero%20conversar%20sobre%20um%20projeto.'
 
 const capabilities = [
-  ['Sistemas de gestão', 'Produtos para operação: pedidos, estoque, pagamentos, usuários, relatórios e rotinas internas.'],
-  ['Agendamento', 'Experiências de reserva e gestão de horários adaptadas ao fluxo de cada negócio.'],
-  ['Sites e presença digital', 'Sites institucionais e páginas comerciais com foco em clareza, confiança e conversão.'],
-  ['Aplicações locais', 'Soluções para rede local, SQLite, Node.js, impressão e instalação em ambiente Windows.'],
+  {
+    title: 'Sistemas de gestão',
+    description: 'Pedidos, estoque, pagamentos, usuários e relatórios organizados em uma operação mais simples.',
+    image: 'https://images.unsplash.com/photo-1771922748624-b205cf5d002d?auto=format&fit=crop&w=1200&q=82',
+    alt: 'Notebook e celular exibindo uma interface de gestão',
+  },
+  {
+    title: 'Agendamento',
+    description: 'Reservas e horários organizados de forma clara para o cliente e para o negócio.',
+    image: 'https://images.unsplash.com/photo-1668608321326-6a82b70558bc?auto=format&fit=crop&w=1200&q=82',
+    alt: 'Pessoa planejando atividades em uma mesa de trabalho',
+  },
+  {
+    title: 'Sites e presença digital',
+    description: 'Sites e páginas comerciais pensados para apresentar o negócio com clareza e facilitar o contato.',
+    image: 'https://images.unsplash.com/photo-1663882658055-40f1d4249867?auto=format&fit=crop&w=1200&q=82',
+    alt: 'Notebook e celular em uma mesa de trabalho',
+  },
+  {
+    title: 'Aplicações locais',
+    description: 'Sistemas instalados no próprio estabelecimento, preparados para acompanhar a rotina da operação.',
+    image: 'https://images.unsplash.com/photo-1535341000823-01aa350a4fbb?auto=format&fit=crop&w=1200&q=82',
+    alt: 'Computador em um ambiente de trabalho',
+  },
 ]
 
 const process = [
@@ -99,12 +119,22 @@ const process = [
         </div>
       </header>
 
-      <div class="capability-list">
-        {capabilities.map(([title, description], index) => (
-          <article class="capability-item">
-            <span>{String(index + 1).padStart(2, '0')}</span>
-            <h3>{title}</h3>
-            <p>{description}</p>
+      <div class="capability-grid">
+        {capabilities.map((capability, index) => (
+          <article class="capability-card">
+            <div class="capability-card__media">
+              <img
+                src={capability.image}
+                alt={capability.alt}
+                loading="lazy"
+                decoding="async"
+              />
+              <span>{String(index + 1).padStart(2, '0')}</span>
+            </div>
+            <div class="capability-card__content">
+              <h3>{capability.title}</h3>
+              <p>{capability.description}</p>
+            </div>
           </article>
         ))}
       </div>
