@@ -495,3 +495,492 @@ footer small { font-size: 10px; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
 }
+
+
+/* =========================================================
+   CASE LARISSA SOUZA
+========================================================= */
+
+.project-card--larissa {
+  background:
+    radial-gradient(circle at 100% 0%, rgba(139,94,94,.08), transparent 36%),
+    var(--surface);
+}
+
+.project-visual--larissa {
+  background: #fbf8f6;
+  border-color: #eadfdb;
+  color: #2d2423;
+}
+
+.larissa-preview {
+  position: absolute;
+  inset: 0;
+  padding: 16px;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 15px;
+  background:
+    radial-gradient(circle at 85% 15%, rgba(139,94,94,.12), transparent 34%),
+    #fbf8f6;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.larissa-preview__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.larissa-preview__brand {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.larissa-preview__brand small {
+  display: block;
+  margin-top: 2px;
+  color: #8b5e5e;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 6px;
+  letter-spacing: .18em;
+}
+
+.larissa-preview__nav {
+  color: #766b69;
+  font-size: 6px;
+  white-space: nowrap;
+}
+
+.larissa-preview__body {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.larissa-preview__body > div:first-child {
+  display: grid;
+  gap: 7px;
+}
+
+.larissa-preview__body small {
+  color: #8b5e5e;
+  font-size: 6px;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+
+.larissa-preview__body strong {
+  display: block;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(14px, 1.7vw, 22px);
+  line-height: 1;
+}
+
+.larissa-preview__body strong em {
+  color: #8b5e5e;
+  font-style: italic;
+}
+
+.larissa-preview__body > div:first-child > span {
+  width: max-content;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: #8b5e5e;
+  color: #fff;
+  font-size: 6px;
+  font-weight: 700;
+}
+
+.larissa-preview__profile {
+  min-height: 100px;
+  padding: 10px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  border-radius: 16px;
+  position: relative;
+  background: linear-gradient(145deg, #efe1dc, #cfaeaa);
+}
+
+.larissa-preview__profile > span {
+  align-self: center;
+  color: rgba(255,255,255,.9);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 28px;
+}
+
+.larissa-preview__profile b {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 8px;
+  padding: 7px 8px;
+  border-radius: 8px;
+  background: #fff;
+  color: #2d2423;
+  font-size: 7px;
+  box-shadow: 0 5px 20px rgba(76,48,36,.08);
+}
+
+.larissa-case-showcase {
+  margin: 56px 0 28px;
+  display: grid;
+  gap: 22px;
+}
+
+.larissa-case-browser {
+  overflow: hidden;
+  border: 1px solid #eadfdb;
+  border-radius: 24px;
+  background: #fbf8f6;
+  box-shadow: 0 24px 80px rgba(0,0,0,.25);
+}
+
+.larissa-case-browser__bar {
+  height: 46px;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: #fff;
+  border-bottom: 1px solid #eadfdb;
+}
+
+.larissa-case-browser__bar span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #dec9c2;
+}
+
+.larissa-case-browser__bar span:first-child {
+  background: #8b5e5e;
+}
+
+.larissa-case-browser__bar b {
+  margin-left: 6px;
+  color: #766b69;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.larissa-site-shell {
+  color: #2d2423;
+  background: #fbf8f6;
+}
+
+.larissa-site-nav {
+  padding: 22px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.larissa-site-brand {
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.larissa-site-brand strong {
+  display: block;
+  font-size: 22px;
+}
+
+.larissa-site-brand small {
+  display: block;
+  margin-top: 2px;
+  color: #8b5e5e;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .2em;
+}
+
+.larissa-site-links {
+  color: #766b69;
+  font-size: 11px;
+}
+
+.larissa-site-hero {
+  padding: 36px 32px 46px;
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 38px;
+  align-items: center;
+}
+
+.larissa-site-hero__copy {
+  display: grid;
+  justify-items: start;
+  gap: 14px;
+}
+
+.larissa-site-hero__copy > small,
+.larissa-feature-card__tag {
+  color: #8b5e5e;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+
+.larissa-site-hero__copy h3 {
+  max-width: 630px;
+  margin: 0;
+  color: #2d2423;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(36px, 5vw, 66px);
+  font-weight: 600;
+  line-height: .98;
+  letter-spacing: -.04em;
+}
+
+.larissa-site-hero__copy h3 em {
+  color: #8b5e5e;
+}
+
+.larissa-site-hero__copy p {
+  max-width: 540px;
+  margin: 0;
+  color: #766b69;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.larissa-site-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.larissa-site-actions span {
+  padding: 11px 14px;
+  border: 1px solid #eadfdb;
+  border-radius: 11px;
+  background: #fff;
+  color: #2d2423;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.larissa-site-actions span:first-child {
+  border-color: #8b5e5e;
+  background: #8b5e5e;
+  color: #fff;
+}
+
+.larissa-site-profile {
+  min-height: 340px;
+  padding: 18px;
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  border-radius: 28px;
+  background: linear-gradient(145deg, #efe1dc, #cfaeaa);
+  box-shadow: 0 18px 50px rgba(76,48,36,.08);
+}
+
+.larissa-site-photo {
+  position: absolute;
+  inset: 18px 18px 68px;
+  display: grid;
+  place-items: center;
+  border-radius: 20px;
+  background: rgba(255,255,255,.23);
+  color: rgba(255,255,255,.9);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 64px;
+}
+
+.larissa-site-profile > div:last-child {
+  width: 100%;
+  padding: 12px 14px;
+  position: relative;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.larissa-site-profile strong,
+.larissa-site-profile small {
+  display: block;
+}
+
+.larissa-site-profile strong {
+  font-size: 13px;
+}
+
+.larissa-site-profile small {
+  margin-top: 3px;
+  color: #766b69;
+  font-size: 9px;
+}
+
+.larissa-case-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 18px;
+}
+
+.larissa-feature-card {
+  min-height: 350px;
+  padding: 26px;
+  overflow: hidden;
+  border: 1px solid #eadfdb;
+  border-radius: 22px;
+  background: #fff;
+  color: #2d2423;
+  box-shadow: 0 16px 44px rgba(0,0,0,.11);
+}
+
+.larissa-feature-card--soft {
+  background: #f4ece9;
+}
+
+.larissa-feature-card--lookup {
+  background:
+    radial-gradient(circle at 12% 15%, rgba(139,94,94,.1), transparent 36%),
+    #fbf8f6;
+}
+
+.larissa-feature-card--admin {
+  background: linear-gradient(145deg, #fff, #f6eeeb);
+}
+
+.larissa-feature-card h3 {
+  margin: 8px 0 20px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 31px;
+  font-weight: 600;
+  line-height: 1.05;
+}
+
+.larissa-feature-card > p {
+  margin-top: -8px;
+  color: #766b69;
+  font-size: 12px;
+}
+
+.larissa-service-demo {
+  padding: 15px;
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  gap: 13px;
+  align-items: center;
+  border: 1px solid #eadfdb;
+  border-radius: 17px;
+  box-shadow: 0 12px 34px rgba(76,48,36,.07);
+}
+
+.larissa-service-demo__image {
+  width: 72px;
+  height: 84px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #efe1dc, #cfaeaa);
+}
+
+.larissa-service-demo strong {
+  font-size: 13px;
+}
+
+.larissa-service-demo p {
+  margin: 5px 0 0;
+  color: #766b69;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.larissa-service-demo__cta {
+  padding: 8px 10px;
+  border-radius: 9px;
+  background: #8b5e5e;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.larissa-form-demo {
+  display: grid;
+  gap: 10px;
+}
+
+.larissa-form-demo > div {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 9px;
+}
+
+.larissa-form-demo label {
+  color: #2d2423;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.larissa-form-demo label span {
+  margin-top: 6px;
+  padding: 10px 11px;
+  display: block;
+  border: 1px solid #eadfdb;
+  border-radius: 10px;
+  background: #fff;
+  color: #9c908d;
+  font-weight: 500;
+}
+
+.larissa-form-demo button {
+  min-height: 39px;
+  border: 0;
+  border-radius: 10px;
+  background: #8b5e5e;
+  color: #fff;
+  font: 700 10px Inter, system-ui, sans-serif;
+}
+
+.larissa-admin-list {
+  display: grid;
+  gap: 10px;
+}
+
+.larissa-admin-list span {
+  padding: 12px 13px;
+  border: 1px solid #eadfdb;
+  border-radius: 12px;
+  background: rgba(255,255,255,.82);
+  color: #625754;
+  font-size: 11px;
+}
+
+.larissa-admin-list span::before {
+  content: '✓';
+  margin-right: 8px;
+  color: #8b5e5e;
+  font-weight: 800;
+}
+
+@media (max-width: 760px) {
+  .larissa-preview__nav { display: none; }
+  .larissa-site-nav { padding: 18px; }
+  .larissa-site-links { display: none; }
+  .larissa-site-hero {
+    padding: 24px 18px 30px;
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .larissa-site-hero__copy h3 { font-size: 42px; }
+  .larissa-site-profile { min-height: 280px; }
+  .larissa-case-grid { grid-template-columns: 1fr; }
+  .larissa-feature-card { min-height: auto; padding: 20px; }
+  .larissa-service-demo {
+    grid-template-columns: 58px 1fr;
+  }
+  .larissa-service-demo__image {
+    width: 58px;
+    height: 68px;
+  }
+  .larissa-service-demo__cta {
+    grid-column: 1 / -1;
+    text-align: center;
+  }
+}
