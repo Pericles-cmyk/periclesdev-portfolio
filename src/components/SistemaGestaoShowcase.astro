@@ -1,36 +1,41 @@
 ---
 const screens = [
   {
-    src: '/projects/sistema-gestao/mesas.webp',
-    title: 'Mesas',
-    description: 'Acompanhamento visual da operação e status das mesas.',
-  },
-  {
-    src: '/projects/sistema-gestao/pedido.webp',
-    title: 'Pedidos',
-    description: 'Lançamento de itens, quantidades e observações.',
-  },
-  {
-    src: '/projects/sistema-gestao/pagamento.webp',
-    title: 'Pagamento',
-    description: 'Fechamento da comanda com diferentes formas de pagamento.',
+    src: '/projects/sistema-gestao/login.webp',
+    title: 'Login e acesso local',
+    description: 'Acesso ao sistema e endereço local para celulares e outros dispositivos conectados à rede.',
   },
   {
     src: '/projects/sistema-gestao/cardapio.webp',
     title: 'Cardápio',
-    description: 'Produtos, categorias, preços e organização do catálogo.',
+    description: 'Produtos, categorias, preços, estoque e disponibilidade em uma visão administrativa.',
+  },
+  {
+    src: '/projects/sistema-gestao/estoque.webp',
+    title: 'Estoque',
+    description: 'Consulta e ajuste rápido de quantidades, com destaque para itens com estoque baixo.',
+  },
+  {
+    src: '/projects/sistema-gestao/pedido.webp',
+    title: 'Gerência da mesa',
+    description: 'Seleção de produtos e acompanhamento da comanda durante o atendimento.',
+  },
+  {
+    src: '/projects/sistema-gestao/pagamento.webp',
+    title: 'Pagamento',
+    description: 'Fluxo de fechamento com PIX, dinheiro, crédito e débito, incluindo pagamento misto.',
   },
   {
     src: '/projects/sistema-gestao/historico.webp',
     title: 'Histórico',
-    description: 'Consulta de movimentações e acompanhamento da operação.',
+    description: 'Consulta do movimento por data ou período e geração de relatórios.',
   },
 ]
 
 const highlights = [
   ['01', 'Operação local', 'Funciona dentro do próprio estabelecimento e pode ser acessado pelos dispositivos conectados à mesma rede.'],
-  ['02', 'Personalização', 'Nome, logo, cores, cardápio, impressora e usuários podem ser configurados para cada cliente.'],
-  ['03', 'Tempo real', 'Alterações da operação são refletidas entre os dispositivos conectados durante o atendimento.'],
+  ['02', 'Administração', 'Cardápio, estoque, mesas, usuários, histórico e configurações ficam concentrados no painel administrativo.'],
+  ['03', 'Atendimento', 'Mesas e pedidos de balcão compartilham o mesmo fluxo operacional, com atualização durante o atendimento.'],
   ['04', 'Instalação simplificada', 'O sistema é entregue com instalador próprio para Windows e preparado para uso no ambiente do cliente.'],
 ]
 ---
@@ -40,21 +45,21 @@ const highlights = [
       <span class="portfolio-kicker">VISÃO DO PRODUTO</span>
       <h2>Uma base de gestão preparada para diferentes operações.</h2>
       <p>
-        O sistema concentra atendimento, pedidos, produção, pagamentos e administração
+        O sistema concentra atendimento, pedidos, estoque, pagamentos e administração
         em uma única experiência, com configuração adaptável ao estabelecimento.
       </p>
     </div>
 
     <figure class="management-case__main-shot">
       <img
-        src="/projects/sistema-gestao/painel-admin.webp"
-        alt="Painel administrativo do Sistema de Gestão"
+        src="/projects/sistema-gestao/atendimentos.webp"
+        alt="Tela atual de atendimentos do Sistema de Gestão"
         loading="eager"
         decoding="async"
       />
       <figcaption>
-        <span>Painel administrativo</span>
-        <strong>Visão central da operação</strong>
+        <span>Atendimentos</span>
+        <strong>Mesas e pedidos de balcão</strong>
       </figcaption>
     </figure>
   </div>
@@ -93,8 +98,8 @@ const highlights = [
     <h2>Do atendimento à administração.</h2>
     <p>
       A proposta é manter a operação simples para quem atende e, ao mesmo tempo,
-      oferecer ao responsável pelo estabelecimento controle sobre produtos, usuários,
-      pagamentos, histórico, impressão e configurações.
+      oferecer ao responsável pelo estabelecimento controle sobre produtos, estoque,
+      usuários, pagamentos, histórico, impressão e configurações.
     </p>
   </section>
 </section>
