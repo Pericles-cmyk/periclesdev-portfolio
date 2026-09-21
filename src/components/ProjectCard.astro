@@ -8,10 +8,11 @@ interface Props {
 const { project } = Astro.props
 const detailUrl = project.kind === 'private' ? `/projetos/${project.slug}` : undefined
 const isLarissa = project.slug === 'larissa-souza'
+const isJazi = project.slug === 'studio-jazi-lino'
 ---
-<article class:list={['project-card', { 'project-card--larissa': isLarissa }]} data-repo-url={project.repoUrl || ''}>
+<article class:list={['project-card', { 'project-card--larissa': isLarissa, 'project-card--jazi': isJazi }]} data-repo-url={project.repoUrl || ''}>
   <a
-    class:list={['project-visual', { 'project-visual--larissa': isLarissa }]}
+    class:list={['project-visual', { 'project-visual--larissa': isLarissa, 'project-visual--jazi': isJazi }]}
     href={detailUrl || project.liveUrl || project.repoUrl || '#'}
     target={project.kind === 'public' ? '_blank' : undefined}
     rel={project.kind === 'public' ? 'noreferrer' : undefined}
@@ -32,6 +33,25 @@ const isLarissa = project.slug === 'larissa-souza'
           <div class="larissa-preview__profile">
             <span>LS</span>
             <b>Larissa Souza ✓</b>
+          </div>
+        </div>
+      </div>
+    ) : isJazi ? (
+      <div class="jazi-preview">
+        <div class="jazi-preview__nav">
+          <span>Sobre</span>
+          <strong>JAZI LINO</strong>
+          <span>Serviços · Contato</span>
+        </div>
+        <div class="jazi-preview__hero">
+          <div>
+            <small>JAZI LINO BEAUTY STUDIO</small>
+            <strong>Realce a sua beleza com um atendimento feito para você.</strong>
+            <span>Conhecer serviços</span>
+          </div>
+          <div class="jazi-preview__logo">
+            <b>JL</b>
+            <small>BEAUTY STUDIO</small>
           </div>
         </div>
       </div>
