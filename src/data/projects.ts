@@ -29,9 +29,10 @@ export const privateCases: PortfolioProject[] = [
     subtitle: 'Site e fluxo de agendamento',
     description:
       'Experiência de agendamento com consulta e cancelamento seguro, área administrativa, atualização em tempo real e integração com canais de contato.',
-    stack: ['React', 'Vite', 'Supabase', 'PostgreSQL', 'Realtime'],
+    stack: ['HTML', 'CSS', 'JavaScript', 'Vite', 'Supabase', 'PostgreSQL', 'Realtime'],
     category: 'Agendamento',
     kind: 'private',
+    liveUrl: 'https://larissa-souza-studio.vercel.app/',
     featured: true,
   },
   {
