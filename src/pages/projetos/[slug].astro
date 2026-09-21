@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Header from '../../components/Header.astro'
+import Footer from '../../components/Footer.astro'
+import { privateCases, type PortfolioProject } from '../../data/projects'
+
+export function getStaticPaths() {
+  return privateCases.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }))
+}
+
+interface Props {
+  project: PortfolioProject
+}
+
+const { project } = Astro.props
+---
+<BaseLayout
+  title={`${project.title} | PericlesDev`}
+  description={project.description}
+>
+  <Header />
+
+  <main class="case-page">
+    <section class="case-hero">
+      <a class="back-link" href="/#projetos">← Voltar aos projetos</a>
+      <span class="eyebrow">PROJETO COMERCIAL · CÓDIGO-FONTE PRIVADO</span>
+      <h1>{project.title}</h1>
+      <p class="case-subtitle">{project.subtitle}</p>
+      <p class="case-lead">{project.description}</p>
+
+      <div class="tech-list tech-list--large">
+        {project.stack.map((tech) => <span>{tech}</span>)}
+      </div>
+
+      {project.liveUrl && (
+        <a class="btn btn--primary case-live" href={project.liveUrl} target="_blank" rel="noreferrer">
+          Abrir projeto ↗
+        </a>
+      )}
+    </section>
+
+    <section class="case-gallery" aria-label="Galeria do projeto">
+      <div class="case-shot case-shot--desktop">
+        <span>DESKTOP</span>
+        <strong>Screenshot será adicionado aqui</strong>
+      </div>
+      <div class="case-shot case-shot--mobile">
+        <span>MOBILE</span>
+        <strong>Screenshot será adicionado aqui</strong>
+      </div>
+    </section>
+
+    <section class="case-meta">
+      <div><span>Categoria</span><strong>{project.category}</strong></div>
+      <div><span>Entrega</span><strong>Solução personalizada</strong></div>
+      <div><span>Código-fonte</span><strong>Privado</strong></div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
