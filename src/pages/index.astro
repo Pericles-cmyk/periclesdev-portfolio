@@ -41,8 +41,31 @@ const process = [
         </div>
       </div>
 
-      <aside class="portfolio-hero__side" aria-label="Áreas de atuação">
-        <span class="portfolio-hero__monogram">PD</span>
+      <aside class="portfolio-hero__side" aria-label="Perfil e áreas de atuação">
+        <a
+          class="github-profile"
+          href={githubProfile}
+          target="_blank"
+          rel="noreferrer"
+          data-github-profile-link
+          aria-label="Abrir perfil no GitHub"
+        >
+          <img
+            class="github-profile__avatar"
+            src="https://github.com/Pericles-cmyk.png?size=320"
+            alt="Foto do perfil de PericlesDev no GitHub"
+            width="176"
+            height="176"
+            data-github-avatar
+          />
+          <div class="github-profile__identity">
+            <strong data-github-name>PericlesDev</strong>
+            <span data-github-login>@Pericles-cmyk</span>
+          </div>
+          <p class="github-profile__bio" data-github-bio hidden></p>
+          <span class="github-profile__link">GitHub ↗</span>
+        </a>
+
         <div class="portfolio-hero__disciplines">
           <span>01 <strong>Produto & UX</strong></span>
           <span>02 <strong>Desenvolvimento</strong></span>
