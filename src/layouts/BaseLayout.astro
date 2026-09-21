@@ -1,0 +1,35 @@
+---
+import '../styles/global.css'
+
+interface Props {
+  title?: string
+  description?: string
+}
+
+const {
+  title = 'PericlesDev | Sistemas e soluções digitais',
+  description = 'PericlesDev — sistemas de gestão, plataformas de agendamento, landing pages e soluções digitais para negócios reais.',
+} = Astro.props
+const canonical = new URL(Astro.url.pathname, Astro.site)
+const brandImage = 'https://raw.githubusercontent.com/Pericles-cmyk/Pericles-cmyk/main/assets/brand/periclesdev-header.png'
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#06090e" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={brandImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
