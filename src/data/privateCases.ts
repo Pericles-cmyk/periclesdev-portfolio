@@ -42,19 +42,6 @@ export const privateCases: PortfolioProject[] = [
 
 export const curatedPublicFallback: PortfolioProject[] = [
   {
-    id: 'periclesdev-portfolio',
-    title: 'PericlesDev Portfolio',
-    subtitle: 'Portfólio oficial da PericlesDev',
-    description:
-      'Portfólio responsivo com cases privados, projetos públicos sincronizados pela GitHub API e identidade visual própria da PericlesDev.',
-    stack: ['React', 'TypeScript', 'Vite', 'GitHub API', 'Cloudflare'],
-    kind: 'public',
-    category: 'Portfólio',
-    repoUrl: 'https://github.com/Pericles-cmyk/periclesdev-portfolio',
-    liveUrl: 'https://periclesdev.com.br',
-    featured: true,
-  },
-  {
     id: 'periclesdev-comanda',
     title: 'PericlesDev Comanda',
     subtitle: 'Base demonstrativa pública para restaurantes',
