@@ -40,8 +40,8 @@ export const privateCases: PortfolioProject[] = [
     title: 'Jazi Lino Beauty Studio',
     subtitle: 'Landing page comercial',
     description:
-      'Página comercial responsiva para apresentação do studio, serviços, identidade visual e conversão por canais diretos de contato.',
-    stack: ['React', 'Vite', 'Vercel'],
+      'Landing page completa para o Beauty Studio, com serviços, Instagram, galeria, Reels, WhatsApp e painel administrativo conectado ao Supabase em tempo real.',
+    stack: ['React', 'Vite', 'Supabase', 'PostgreSQL', 'Realtime'],
     category: 'Landing page',
     kind: 'private',
     liveUrl: 'https://studiojazilino.periclesdev.com.br/',
