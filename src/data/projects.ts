@@ -15,11 +15,11 @@ export const privateCases: PortfolioProject[] = [
   {
     slug: 'sistema-de-gestao',
     title: 'Sistema de Gestão',
-    subtitle: 'Operação completa para estabelecimentos',
+    subtitle: 'Gestão local para operação de estabelecimentos',
     description:
-      'Solução de gestão com comandas, pedidos, estoque, usuários, pagamentos, impressão, histórico e relatórios. Estruturada para funcionar online ou em rede local, conforme a operação do cliente.',
-    stack: ['Node.js', 'SQLite', 'JavaScript', 'LAN', 'PWA'],
-    category: 'Gestão',
+      'Sistema local e reutilizável para atendimento, pedidos, mesas, produção, pagamentos, impressão e administração, preparado para receber a identidade e a operação de cada estabelecimento.',
+    stack: ['React', 'Vite', 'Node.js', 'Express', 'SQLite', 'Socket.IO'],
+    category: 'Sistema de gestão',
     kind: 'private',
     featured: true,
   },
