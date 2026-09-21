@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/api/github-projects", "destination": "/api/github-projects" }
+  ]
+}
