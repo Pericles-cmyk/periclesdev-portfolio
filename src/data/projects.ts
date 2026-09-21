@@ -53,7 +53,7 @@ export const curatedPublicProjects: PortfolioProject[] = [
   {
     slug: 'periclesdev-comanda',
     title: 'PericlesDev Comanda',
-    subtitle: 'Base demonstrativa pública para restaurantes',
+    subtitle: 'Sistema de comandas para restaurantes',
     description:
       'Sistema web de comandas e mesas para operação em rede local, com controle de estoque, pagamentos e impressão térmica.',
     stack: ['React', 'Node.js', 'PostgreSQL', 'Socket.IO', 'Docker'],
@@ -65,7 +65,7 @@ export const curatedPublicProjects: PortfolioProject[] = [
   {
     slug: 'unicesumar-parking',
     title: 'Sistema de Estacionamento — UniCesumar',
-    subtitle: 'Projeto acadêmico público',
+    subtitle: 'Projeto acadêmico',
     description:
       'Sistema acadêmico de gerenciamento de estacionamento com registro de entrada e saída por placa, cálculo automático de tarifas, métricas em tempo real, histórico diário e versão CLI em Python.',
     stack: ['HTML', 'CSS', 'JavaScript', 'Python'],
