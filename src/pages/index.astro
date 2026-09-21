@@ -3,13 +3,10 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import ProjectCard from '../components/ProjectCard.astro'
-import PublicFeaturedProject from '../components/PublicFeaturedProject.astro'
 import { curatedPublicProjects, privateCases } from '../data/projects'
 
 const githubProfile = 'https://github.com/Pericles-cmyk'
 const whatsapp = 'https://wa.me/5581994094491?text=Olá%20PericlesDev!%20Quero%20conversar%20sobre%20um%20projeto.'
-const featuredPublicProject = curatedPublicProjects.find((project) => project.slug === 'unicesumar-parking')
-const publicProjectRows = curatedPublicProjects.filter((project) => project.slug !== 'unicesumar-parking')
 
 const capabilities = [
   ['Sistemas de gestão', 'Produtos para operação: pedidos, estoque, pagamentos, usuários, relatórios e rotinas internas.'],
@@ -138,30 +135,22 @@ const process = [
     </section>
 
     <section class="portfolio-section public-work">
-      <header class="public-work__head">
+      <header class="portfolio-section__head">
         <div>
-          <span class="portfolio-kicker">CÓDIGO PÚBLICO</span>
-          <h2>Projetos no GitHub.</h2>
+          <span class="portfolio-kicker">OUTROS PROJETOS</span>
+          <h2>Projetos que também fazem parte da minha trajetória.</h2>
         </div>
-        <a class="portfolio-link" href={githubProfile} target="_blank" rel="noreferrer">Ver perfil completo ↗</a>
+        <p>
+          Estudos, experiências e soluções que mantenho disponíveis para consulta.
+        </p>
       </header>
 
-      {featuredPublicProject && <PublicFeaturedProject project={featuredPublicProject} />}
+      <div class="project-grid project-grid--public" data-github-grid>
+        {curatedPublicProjects.map((project) => <ProjectCard project={project} />)}
+      </div>
 
-      <div class="public-project-list" data-github-grid>
-        {publicProjectRows.map((project) => (
-          <article class="public-project-row" data-repo-url={project.repoUrl || ''}>
-            <div>
-              <span>{project.category}</span>
-              <h3>{project.title}</h3>
-            </div>
-            <p>{project.description}</p>
-            <div class="public-project-row__meta">
-              <span>{project.stack.slice(0, 3).join(' · ')}</span>
-              <a href={project.repoUrl} target="_blank" rel="noreferrer" aria-label={`Abrir ${project.title} no GitHub`}>↗</a>
-            </div>
-          </article>
-        ))}
+      <div class="public-work__footer">
+        <a class="portfolio-link" href={githubProfile} target="_blank" rel="noreferrer">Ver mais projetos ↗</a>
       </div>
     </section>
 
@@ -222,47 +211,92 @@ const process = [
         .map((element) => element.dataset.repoUrl)
         .filter(Boolean),
     )
+
     if (existing.has(repo.html_url)) return
 
-    const row = document.createElement('article')
-    row.className = 'public-project-row'
-    row.dataset.repoUrl = repo.html_url
+    const article = document.createElement('article')
+    article.className = 'project-card'
+    article.dataset.repoUrl = repo.html_url
 
-    const heading = document.createElement('div')
+    const visual = document.createElement('a')
+    visual.className = 'project-visual'
+    visual.href = repo.homepage || repo.html_url
+    visual.target = '_blank'
+    visual.rel = 'noreferrer'
+    visual.setAttribute('aria-label', `Abrir ${titleFromRepo(repo.name)}`)
+
+    const glow = document.createElement('div')
+    glow.className = 'project-visual__glow'
+
+    const browser = document.createElement('div')
+    browser.className = 'project-browser'
+    browser.append(document.createElement('span'), document.createElement('span'), document.createElement('span'))
+
+    const lines = document.createElement('div')
+    lines.className = 'project-mock-lines'
+    lines.append(document.createElement('i'), document.createElement('i'), document.createElement('i'), document.createElement('i'))
+
+    visual.append(glow, browser, lines)
+
+    const head = document.createElement('div')
+    head.className = 'project-card__head'
+
+    const headText = document.createElement('div')
     const category = document.createElement('span')
-    category.textContent = repo.topics.find((topic) => topic !== 'portfolio') || 'Open source'
+    category.className = 'eyebrow'
+    category.textContent = repo.topics.find((topic) => topic !== 'portfolio') || 'Projeto'
+
     const title = document.createElement('h3')
     title.textContent = titleFromRepo(repo.name)
-    heading.append(category, title)
+
+    headText.append(category, title)
+    head.append(headText)
 
     const description = document.createElement('p')
-    description.textContent = repo.description || 'Projeto público desenvolvido pela PericlesDev.'
+    description.className = 'project-description'
+    description.textContent = repo.description || 'Projeto desenvolvido como parte da minha evolução profissional.'
 
-    const meta = document.createElement('div')
-    meta.className = 'public-project-row__meta'
-
-    const stack = document.createElement('span')
+    const tech = document.createElement('div')
+    tech.className = 'tech-list'
     const technologies = [
       repo.language,
-      ...repo.topics.filter((topic) => topic !== 'portfolio').slice(0, 2),
-    ].filter(Boolean)
-    stack.textContent = technologies.join(' · ')
+      ...repo.topics.filter((topic) => topic !== 'portfolio').slice(0, 3),
+    ].filter(Boolean) as string[]
 
-    const link = document.createElement('a')
-    link.href = repo.html_url
-    link.target = '_blank'
-    link.rel = 'noreferrer'
-    link.textContent = '↗'
-    link.setAttribute('aria-label', `Abrir ${titleFromRepo(repo.name)} no GitHub`)
+    technologies.forEach((item) => {
+      const span = document.createElement('span')
+      span.textContent = item
+      tech.appendChild(span)
+    })
 
-    meta.append(stack, link)
-    row.append(heading, description, meta)
-    grid.appendChild(row)
+    const actions = document.createElement('div')
+    actions.className = 'project-actions'
+
+    if (repo.homepage) {
+      const live = document.createElement('a')
+      live.className = 'text-link'
+      live.href = repo.homepage
+      live.target = '_blank'
+      live.rel = 'noreferrer'
+      live.textContent = 'Ver projeto ↗'
+      actions.appendChild(live)
+    }
+
+    const code = document.createElement('a')
+    code.className = 'text-link text-link--secondary'
+    code.href = repo.html_url
+    code.target = '_blank'
+    code.rel = 'noreferrer'
+    code.textContent = 'Ver código ↗'
+    actions.appendChild(code)
+
+    article.append(visual, head, description, tech, actions)
+    grid.appendChild(article)
   }
 
   fetch('/api/github-projects')
     .then((response) => {
-      if (!response.ok) throw new Error('GitHub indisponível')
+      if (!response.ok) throw new Error('Projetos indisponíveis')
       return response.json()
     })
     .then((data: { projects?: GithubProject[] }) => {
