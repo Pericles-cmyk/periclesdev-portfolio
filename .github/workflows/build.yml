@@ -22,5 +22,5 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build
+      - name: Build Astro
         run: npm run build
