@@ -23,7 +23,7 @@ async function getGithubProjects(env) {
 
   const repos = await githubResponse.json()
   const projects = repos
-    .filter((repo) => !repo.fork && !repo.archived && (repo.topics || []).includes(PORTFOLIO_TOPIC))
+    .filter((repo) => !repo.fork && !repo.archived && repo.name !== 'periclesdev-portfolio' && (repo.topics || []).includes(PORTFOLIO_TOPIC))
     .map(({ fork, archived, ...repo }) => ({ ...repo, topics: repo.topics || [] }))
 
   return new Response(
