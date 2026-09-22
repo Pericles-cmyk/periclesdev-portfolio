@@ -177,7 +177,7 @@ const process = [
       </header>
 
       <div class="capability-grid">
-        {capabilities.map((capability, index) => (
+        {capabilities.map((capability) => (
           <article class="capability-card">
             <div class="capability-card__media">
               <img
@@ -186,7 +186,6 @@ const process = [
                 loading="lazy"
                 decoding="async"
               />
-              <span>{String(index + 1).padStart(2, '0')}</span>
             </div>
             <div class="capability-card__content">
               <h3>{capability.title}</h3>
