@@ -2914,3 +2914,54 @@ footer a:hover { color: var(--cyan); }
     pointer-events: none;
   }
 }
+
+
+/* =========================================================
+   PROJECT RAIL — UM CARD POR VEZ, SOMENTE SETAS
+========================================================= */
+.project-rail {
+  grid-auto-columns: 100%;
+  gap: 24px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+}
+.project-rail::-webkit-scrollbar {
+  display: none;
+}
+.project-rail > .project-card {
+  width: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.project-rail-button:disabled {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.project-rail-shell--scrollable:hover .project-rail-button:not(:disabled),
+.project-rail-shell--scrollable:focus-within .project-rail-button:not(:disabled) {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.project-rail-scrollbar {
+  display: none !important;
+}
+
+@media (max-width: 980px) {
+  .project-rail {
+    grid-auto-columns: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  .project-rail {
+    grid-auto-columns: 100%;
+    margin-right: 0;
+    padding-right: 0;
+  }
+}
