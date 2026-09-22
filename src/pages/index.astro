@@ -413,9 +413,8 @@ const process = [
     let wheelLocked = false
 
     const visibleCount = () => {
-      if (window.matchMedia('(max-width: 700px)').matches) return 1
-      if (window.matchMedia('(max-width: 980px)').matches) return 2
-      return 3
+      if (window.matchMedia('(max-width: 980px)').matches) return 1
+      return 2
     }
 
     const maxIndex = () => Math.max(cards().length - visibleCount(), 0)
