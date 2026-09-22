@@ -162,9 +162,6 @@ const process = [
           {privateCases.map((project) => <ProjectCard project={project} />)}
         </div>
         <button class="project-rail-button project-rail-button--next" type="button" aria-label="Próximos projetos" data-rail-next>→</button>
-        <div class="project-rail-scrollbar" aria-hidden="true" data-rail-scrollbar>
-          <span data-rail-thumb></span>
-        </div>
       </div>
     </section>
 
@@ -241,9 +238,6 @@ const process = [
           {curatedPublicProjects.map((project) => <ProjectCard project={project} />)}
         </div>
         <button class="project-rail-button project-rail-button--next" type="button" aria-label="Próximos projetos" data-rail-next>→</button>
-        <div class="project-rail-scrollbar" aria-hidden="true" data-rail-scrollbar>
-          <span data-rail-thumb></span>
-        </div>
       </div>
 
       <div class="public-work__footer">
@@ -411,12 +405,12 @@ const process = [
     const rail = shell.querySelector<HTMLElement>('[data-project-rail]')
     const previous = shell.querySelector<HTMLButtonElement>('[data-rail-prev]')
     const next = shell.querySelector<HTMLButtonElement>('[data-rail-next]')
-    const scrollbar = shell.querySelector<HTMLElement>('[data-rail-scrollbar]')
-    const thumb = shell.querySelector<HTMLElement>('[data-rail-thumb]')
 
     if (!rail) return
 
     const cards = () => Array.from(rail.querySelectorAll<HTMLElement>('.project-card'))
+    let activeIndex = 0
+    let wheelLocked = false
 
     const cardPositions = () => {
       const railRect = rail.getBoundingClientRect()
@@ -431,8 +425,7 @@ const process = [
       if (!items.length) return
 
       const cardWidth = items[0].getBoundingClientRect().width
-      const endSpace = Math.max(0, rail.clientWidth - cardWidth)
-      rail.style.paddingRight = `${endSpace}px`
+      rail.style.paddingRight = `${Math.max(0, rail.clientWidth - cardWidth)}px`
     }
 
     const nearestIndex = () => {
@@ -453,51 +446,37 @@ const process = [
       return nearest
     }
 
+    const updateControls = () => {
+      const items = cards()
+      const hasMultiple = items.length > 1
+
+      shell.classList.toggle('project-rail-shell--scrollable', hasMultiple)
+
+      if (previous) previous.disabled = !hasMultiple || activeIndex <= 0
+      if (next) next.disabled = !hasMultiple || activeIndex >= items.length - 1
+    }
+
     const scrollToIndex = (index: number, behavior: ScrollBehavior = 'smooth') => {
       const positions = cardPositions()
       if (!positions.length) return
 
-      const targetIndex = Math.max(0, Math.min(index, positions.length - 1))
+      activeIndex = Math.max(0, Math.min(index, positions.length - 1))
+
       rail.scrollTo({
-        left: positions[targetIndex],
+        left: positions[activeIndex],
         behavior,
       })
+
+      updateControls()
     }
 
     const move = (direction: number) => {
-      scrollToIndex(nearestIndex() + direction)
+      scrollToIndex(activeIndex + direction)
     }
 
-    const updateScrollbar = () => {
-      if (!scrollbar || !thumb) return
+    previous?.addEventListener('click', () => move(-1))
+    next?.addEventListener('click', () => move(1))
 
-      const items = cards()
-      if (!items.length) {
-        scrollbar.hidden = true
-        return
-      }
-
-      scrollbar.hidden = false
-
-      const cardWidth = items[0].getBoundingClientRect().width
-      const trackWidth = scrollbar.clientWidth
-      const thumbWidth = Math.min(cardWidth, trackWidth)
-      const maxTravel = Math.max(trackWidth - thumbWidth, 0)
-      const totalSteps = Math.max(items.length - 1, 1)
-      const activeIndex = nearestIndex()
-      const discretePosition = items.length > 1
-        ? (activeIndex / totalSteps) * maxTravel
-        : 0
-
-      thumb.style.width = `${thumbWidth}px`
-      thumb.style.transform = `translateX(${discretePosition}px)`
-    }
-
-    const snapToNearest = (behavior: ScrollBehavior = 'smooth') => {
-      scrollToIndex(nearestIndex(), behavior)
-    }
-
-    let wheelLocked = false
     rail.addEventListener(
       'wheel',
       (event) => {
@@ -520,75 +499,22 @@ const process = [
       { passive: false },
     )
 
-    previous?.addEventListener('click', () => move(-1))
-    next?.addEventListener('click', () => move(1))
-
     let scrollIdle = 0
-    let animationFrame = 0
 
     rail.addEventListener('scroll', () => {
-      cancelAnimationFrame(animationFrame)
-      animationFrame = requestAnimationFrame(updateScrollbar)
-
       window.clearTimeout(scrollIdle)
+
       scrollIdle = window.setTimeout(() => {
-        snapToNearest()
-      }, 140)
+        activeIndex = nearestIndex()
+        scrollToIndex(activeIndex)
+      }, 120)
     })
-
-    let draggingThumb = false
-
-    const indexFromPointer = (clientX: number) => {
-      const items = cards()
-      if (!scrollbar || !thumb || !items.length) return 0
-
-      const trackRect = scrollbar.getBoundingClientRect()
-      const thumbWidth = thumb.getBoundingClientRect().width
-      const usable = Math.max(trackRect.width - thumbWidth, 1)
-      const thumbCenterTarget = clientX - trackRect.left - thumbWidth / 2
-      const ratio = Math.max(0, Math.min(1, thumbCenterTarget / usable))
-
-      return Math.round(ratio * Math.max(items.length - 1, 0))
-    }
-
-    const selectFromPointer = (clientX: number, behavior: ScrollBehavior) => {
-      const index = indexFromPointer(clientX)
-      scrollToIndex(index, behavior)
-      updateScrollbar()
-    }
-
-    scrollbar?.addEventListener('pointerdown', (event) => {
-      draggingThumb = true
-      scrollbar.setPointerCapture(event.pointerId)
-      selectFromPointer(event.clientX, 'auto')
-    })
-
-    scrollbar?.addEventListener('pointermove', (event) => {
-      if (!draggingThumb) return
-      selectFromPointer(event.clientX, 'auto')
-    })
-
-    const finishScrollbarDrag = (event: PointerEvent) => {
-      if (!draggingThumb) return
-      draggingThumb = false
-      scrollbar?.releasePointerCapture(event.pointerId)
-      snapToNearest('smooth')
-    }
-
-    scrollbar?.addEventListener('pointerup', finishScrollbarDrag)
-    scrollbar?.addEventListener('pointercancel', finishScrollbarDrag)
 
     const refreshRail = () => {
       prepareRailEndSpace()
-
-      const items = cards()
-      const hasOverflow =
-        items.length > 1 && rail.scrollWidth > rail.clientWidth + 2
-
-      shell.classList.toggle('project-rail-shell--scrollable', hasOverflow)
-
-      snapToNearest('auto')
-      requestAnimationFrame(updateScrollbar)
+      activeIndex = Math.min(activeIndex, Math.max(cards().length - 1, 0))
+      scrollToIndex(activeIndex, 'auto')
+      updateControls()
     }
 
     const observer = new MutationObserver(refreshRail)
