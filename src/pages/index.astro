@@ -294,6 +294,30 @@ const process = [
       .replace(/\b\w/g, (letter) => letter.toUpperCase())
   }
 
+  const techMarks: Record<string, string> = {
+    Astro: 'A',
+    TypeScript: 'TS',
+    React: '⚛',
+    Vite: 'V',
+    'Node.js': 'JS',
+    Express: 'EX',
+    SQLite: 'DB',
+    'Socket.IO': 'IO',
+    HTML: '5',
+    CSS: '3',
+    JavaScript: 'JS',
+    Supabase: 'S',
+    PostgreSQL: 'PG',
+    Realtime: 'RT',
+    Docker: 'D',
+    Python: 'Py',
+    Cloudflare: 'CF',
+  }
+
+  function techKey(tech: string) {
+    return tech.toLowerCase().replace(/[^a-z0-9]+/g, '-')
+  }
+
   function createAction(label: string, href: string, primary = false) {
     const link = document.createElement('a')
     link.className = primary
@@ -374,16 +398,26 @@ const process = [
     description.textContent = repo.description || 'Projeto desenvolvido como parte da minha evolução profissional.'
 
     const tech = document.createElement('div')
-    tech.className = 'tech-list'
+    tech.className = 'tech-list tech-list--branded'
     const technologies = [
       repo.language,
       ...repo.topics.filter((topic) => topic !== 'portfolio').slice(0, 4),
     ].filter(Boolean) as string[]
 
     technologies.forEach((item) => {
-      const span = document.createElement('span')
-      span.textContent = item
-      tech.appendChild(span)
+      const chip = document.createElement('span')
+      chip.className = 'tech-chip'
+      chip.dataset.tech = techKey(item)
+
+      const icon = document.createElement('b')
+      icon.setAttribute('aria-hidden', 'true')
+      icon.textContent = techMarks[item] || '•'
+
+      const label = document.createElement('span')
+      label.textContent = item
+
+      chip.append(icon, label)
+      tech.appendChild(chip)
     })
 
     const actions = document.createElement('div')
