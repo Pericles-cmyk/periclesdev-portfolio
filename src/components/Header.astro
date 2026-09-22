@@ -20,7 +20,7 @@ const githubAvatar = 'https://github.com/Pericles-cmyk.png?size=96'
   <nav class="nav-links" aria-label="Navegação principal">
     <a href="/#inicio" data-home-link>Início</a>
     <a href="/#projetos">Projetos</a>
-    <a href="/#solucoes">Atuação</a>
+    <a href="/#solucoes" data-exact-section="solucoes">Atuação</a>
     <a href="/#processo">Processo</a>
     <a href="/#sobre">Sobre</a>
     <a class="btn btn--primary nav-cta" href={whatsapp} target="_blank" rel="noreferrer">Conversar</a>
@@ -68,6 +68,45 @@ const githubAvatar = 'https://github.com/Pericles-cmyk.png?size=96'
       button?.setAttribute('aria-expanded', 'false')
     })
   })
+
+  function placeExactSection(sectionId: string, behavior: ScrollBehavior = 'smooth') {
+    if (!isHomePage) return
+    const target = document.getElementById(sectionId)
+    if (!target) return
+
+    history.replaceState(null, '', `/#${sectionId}`)
+    window.scrollTo({
+      top: target.offsetTop,
+      left: 0,
+      behavior,
+    })
+  }
+
+  document.querySelectorAll<HTMLAnchorElement>('[data-exact-section]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      if (!isHomePage) return
+
+      const sectionId = link.dataset.exactSection
+      if (!sectionId) return
+
+      event.preventDefault()
+      placeExactSection(sectionId)
+
+      nav?.classList.remove('nav-links--open')
+      button?.setAttribute('aria-expanded', 'false')
+    })
+  })
+
+  if (isHomePage && window.location.hash === '#solucoes') {
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        const target = document.getElementById('solucoes')
+        if (target) {
+          window.scrollTo({ top: target.offsetTop, left: 0, behavior: 'auto' })
+        }
+      })
+    })
+  }
 
   button?.addEventListener('click', () => {
     const open = nav?.classList.toggle('nav-links--open') ?? false
