@@ -11,6 +11,9 @@ const isLarissa = project.slug === 'larissa-souza'
 const isJazi = project.slug === 'studio-jazi-lino'
 const isParking = project.slug === 'unicesumar-parking'
 const isManagement = project.slug === 'sistema-de-gestao'
+const statusLabel = project.kind === 'public' ? 'Projeto público' : project.liveUrl ? 'Online' : 'Case'
+const primaryUrl = detailUrl || project.liveUrl || project.repoUrl || '#'
+const primaryExternal = !detailUrl
 ---
 <article
   class:list={[
@@ -34,19 +37,14 @@ const isManagement = project.slug === 'sistema-de-gestao'
         'project-visual--management': isManagement,
       },
     ]}
-    href={detailUrl || project.liveUrl || project.repoUrl || '#'}
-    target={project.kind === 'public' ? '_blank' : undefined}
-    rel={project.kind === 'public' ? 'noreferrer' : undefined}
+    href={primaryUrl}
+    target={primaryExternal ? '_blank' : undefined}
+    rel={primaryExternal ? 'noreferrer' : undefined}
     aria-label={`Abrir ${project.title}`}
   >
     {isManagement ? (
       <div class="management-preview">
-        <img
-          src="/projects/sistema-gestao/atendimentos.webp"
-          alt=""
-          loading="lazy"
-          decoding="async"
-        />
+        <img src="/projects/sistema-gestao/atendimentos.webp" alt="" loading="lazy" decoding="async" />
         <div class="management-preview__overlay">
           <span>Sistema de Gestão</span>
           <strong>Operação centralizada</strong>
@@ -98,14 +96,12 @@ const isManagement = project.slug === 'sistema-de-gestao'
           </div>
           <span>● Aberto</span>
         </div>
-
         <div class="parking-card-preview__metrics">
           <div><small>No pátio</small><strong>12</strong></div>
           <div><small>Saídas</small><strong>08</strong></div>
           <div><small>Isentos</small><strong>03</strong></div>
           <div><small>Receita</small><strong>R$ 42</strong></div>
         </div>
-
         <div class="parking-card-preview__content">
           <div class="parking-card-preview__form">
             <small>Entrada / saída</small>
@@ -113,48 +109,60 @@ const isManagement = project.slug === 'sistema-de-gestao'
             <div><b>Entrada</b><b>Saída</b></div>
           </div>
           <div class="parking-card-preview__chart">
-            <i style="--h:48%"></i>
-            <i style="--h:82%"></i>
-            <i style="--h:62%"></i>
+            <i style="--h:48%"></i><i style="--h:82%"></i><i style="--h:62%"></i>
           </div>
         </div>
       </div>
     ) : (
       <>
         <div class="project-visual__glow"></div>
-        <div class="project-browser">
-          <span></span><span></span><span></span>
-        </div>
+        <div class="project-browser"><span></span><span></span><span></span></div>
         <div class="project-mock-lines"><i></i><i></i><i></i><i></i></div>
       </>
     )}
   </a>
 
-  <div class="project-card__head">
-    <div>
-      <span class="eyebrow">{project.category}</span>
-      <h3>{project.title}</h3>
-      <p class="project-subtitle">{project.subtitle}</p>
+  <div class="project-card__content">
+    <div class="project-card__title-row">
+      <div>
+        <span class="eyebrow">{project.category}</span>
+        <h3>{project.title}</h3>
+      </div>
+      <span class:list={['project-status', { 'project-status--public': project.kind === 'public' }]}>
+        <i aria-hidden="true"></i>{statusLabel}
+      </span>
     </div>
-  </div>
 
-  <p class="project-description">{project.description}</p>
+    <p class="project-description">{project.description}</p>
 
-  <div class="tech-list">
-    {project.stack.map((tech) => <span>{tech}</span>)}
-  </div>
+    <div class="tech-list">
+      {project.stack.slice(0, 5).map((tech) => <span>{tech}</span>)}
+    </div>
 
-  <div class="project-actions">
-    {detailUrl && <a class="text-link" href={detailUrl}>Ver projeto →</a>}
-    {project.liveUrl && (
-      <a class="text-link" href={project.liveUrl} target="_blank" rel="noreferrer">
-        Visitar ↗
+    <div class="project-actions">
+      <a
+        class="project-action project-action--primary"
+        href={primaryUrl}
+        target={primaryExternal ? '_blank' : undefined}
+        rel={primaryExternal ? 'noreferrer' : undefined}
+      >
+        <span aria-hidden="true">↗</span>
+        Ver projeto
       </a>
-    )}
-    {project.repoUrl && (
-      <a class="text-link text-link--secondary" href={project.repoUrl} target="_blank" rel="noreferrer">
-        Ver código ↗
-      </a>
-    )}
+
+      {project.kind === 'private' && project.liveUrl && (
+        <a class="project-action project-action--secondary" href={project.liveUrl} target="_blank" rel="noreferrer">
+          <span aria-hidden="true">◎</span>
+          Visitar
+        </a>
+      )}
+
+      {project.kind === 'public' && project.liveUrl && project.repoUrl && (
+        <a class="project-action project-action--secondary" href={project.repoUrl} target="_blank" rel="noreferrer">
+          <span aria-hidden="true">⌘</span>
+          Ver código
+        </a>
+      )}
+    </div>
   </div>
 </article>
