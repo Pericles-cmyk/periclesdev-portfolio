@@ -120,8 +120,8 @@ img { max-width: 100%; }
   margin: 0 auto;
   padding: 86px 0 72px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 360px;
-  gap: 90px;
+  grid-template-columns: minmax(0, 1fr) minmax(470px, 560px);
+  gap: 64px;
   align-items: center;
   border-bottom: 1px solid var(--line-soft);
 }
@@ -154,75 +154,192 @@ img { max-width: 100%; }
   flex-wrap: wrap;
 }
 .portfolio-hero__side {
-  min-height: 410px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 34px;
-  padding-left: 34px;
-  border-left: 1px solid var(--line);
+  min-width: 0;
 }
-.github-profile {
+
+.profile-card {
+  width: 100%;
+  padding: 28px;
+  overflow: hidden;
+  border: 1px solid rgba(39, 142, 255, .34);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 88% 5%, rgba(22,133,255,.12), transparent 34%),
+    linear-gradient(180deg, rgba(9,16,24,.98), rgba(7,12,18,.98));
+  box-shadow: 0 24px 70px rgba(0,0,0,.24);
+}
+
+.profile-card__top {
   display: grid;
-  justify-items: start;
-  gap: 12px;
-  max-width: 300px;
+  grid-template-columns: 152px minmax(0, 1fr);
+  gap: 24px;
+  align-items: center;
+  padding-bottom: 24px;
 }
-.github-profile__avatar {
-  width: 176px;
-  height: 176px;
+
+.profile-card__avatar-link {
+  display: block;
+  width: max-content;
+}
+
+.profile-card__avatar-wrap {
+  position: relative;
+  width: 152px;
+  height: 152px;
+  display: block;
+}
+
+.profile-card__avatar {
+  width: 152px;
+  height: 152px;
   display: block;
   object-fit: cover;
-  border-radius: 22px;
-  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 50%;
+  border: 2px solid rgba(43,201,232,.78);
   background: var(--surface);
-  box-shadow: 0 20px 60px rgba(0,0,0,.24);
+  box-shadow: 0 18px 46px rgba(0,0,0,.32);
 }
-.github-profile__identity {
+
+.profile-card__status-dot {
+  position: absolute;
+  right: 5px;
+  bottom: 13px;
+  width: 25px;
+  height: 25px;
+  border: 5px solid #091018;
+  border-radius: 50%;
+  background: #21e69a;
+  box-shadow: 0 0 22px rgba(33,230,154,.48);
+}
+
+.profile-card__intro {
+  min-width: 0;
   display: grid;
-  gap: 3px;
+  gap: 16px;
+  align-content: center;
 }
-.github-profile__identity strong {
-  color: #eef4fb;
-  font-size: 18px;
-  letter-spacing: -.02em;
-}
-.github-profile__identity span {
-  color: #657386;
+
+.profile-card__availability {
+  width: max-content;
+  max-width: 100%;
+  padding: 8px 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid rgba(33,230,154,.25);
+  border-radius: 999px;
+  background: rgba(33,230,154,.07);
+  color: #75f0c0;
   font-size: 11px;
+  font-weight: 600;
 }
-.github-profile__bio {
+
+.profile-card__availability i {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #21e69a;
+  box-shadow: 0 0 12px rgba(33,230,154,.72);
+}
+
+.profile-card__bio {
   margin: 0;
-  max-width: 290px;
-  color: #97a4b5;
-  font-size: 12px;
+  color: #a9b6c8;
+  font-size: 13px;
   line-height: 1.65;
 }
-.github-profile__link {
-  color: #718096;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-.github-profile:hover .github-profile__link { color: var(--cyan); }
-.portfolio-hero__disciplines {
-  display: grid;
+
+.profile-card__rows {
   border-top: 1px solid var(--line);
 }
-.portfolio-hero__disciplines span {
-  padding: 14px 0;
+
+.profile-card__row {
+  min-height: 69px;
   display: grid;
-  grid-template-columns: 34px 1fr;
-  gap: 8px;
+  grid-template-columns: 32px 112px minmax(0,1fr);
+  gap: 14px;
+  align-items: center;
   border-bottom: 1px solid var(--line);
-  color: #566476;
-  font-size: 10px;
 }
-.portfolio-hero__disciplines strong {
-  color: #c8d4e2;
+
+.profile-card__icon {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  color: #75bfff;
+}
+
+.profile-card__icon svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.profile-card__icon--linkedin {
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  background: #9dccff;
+  color: #07111b;
+  font-size: 15px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.profile-card__label {
+  color: #77879b;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.profile-card__row strong,
+.profile-card__row a {
+  min-width: 0;
+  color: #eef4fb;
   font-size: 13px;
   font-weight: 500;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.profile-card__row a {
+  transition: color .2s ease;
+}
+
+.profile-card__row a:hover {
+  color: var(--cyan);
+}
+
+.profile-card__actions {
+  padding-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+
+.profile-card__button {
+  min-width: 168px;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.profile-card__linkedin {
+  color: #4da8ff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.profile-card__linkedin:hover {
+  color: var(--cyan);
 }
 
 .portfolio-section {
@@ -778,28 +895,10 @@ footer a:hover { color: var(--cyan); }
     gap: 50px;
   }
   .portfolio-hero__side {
-    min-height: auto;
-    padding: 28px 0 0;
-    border-left: 0;
-    border-top: 1px solid var(--line);
+    padding-top: 4px;
   }
-  .github-profile {
-    grid-template-columns: 96px 1fr;
-    column-gap: 18px;
-    align-items: center;
-    max-width: 560px;
-  }
-  .github-profile__avatar {
-    width: 96px;
-    height: 96px;
-    grid-row: 1 / span 3;
-    border-radius: 18px;
-  }
-  .github-profile__bio {
-    max-width: 440px;
-  }
-  .github-profile__link {
-    align-self: end;
+  .profile-card {
+    max-width: 720px;
   }
   .portfolio-section__head,
   .portfolio-about__grid { grid-template-columns: 1fr; gap: 24px; }
@@ -839,23 +938,62 @@ footer a:hover { color: var(--cyan); }
   .portfolio-hero h1 { font-size: 44px; }
   .portfolio-hero__copy > p { font-size: 16px; }
   .portfolio-hero__actions { align-items: flex-start; flex-direction: column; }
-  .github-profile {
-    grid-template-columns: 78px 1fr;
-    column-gap: 14px;
-    row-gap: 4px;
+  .profile-card {
+    padding: 18px;
+    border-radius: 16px;
   }
-  .github-profile__avatar {
-    width: 78px;
-    height: 78px;
-    border-radius: 15px;
+  .profile-card__top {
+    grid-template-columns: 82px minmax(0,1fr);
+    gap: 14px;
+    padding-bottom: 18px;
   }
-  .github-profile__identity strong { font-size: 16px; }
-  .github-profile__bio {
+  .profile-card__avatar-wrap,
+  .profile-card__avatar {
+    width: 82px;
+    height: 82px;
+  }
+  .profile-card__status-dot {
+    width: 18px;
+    height: 18px;
+    right: 0;
+    bottom: 4px;
+    border-width: 4px;
+  }
+  .profile-card__availability {
+    padding: 6px 9px;
+    font-size: 9px;
+  }
+  .profile-card__bio {
     font-size: 11px;
     line-height: 1.5;
   }
-  .github-profile__link { display: none; }
-  .portfolio-hero__disciplines { margin-top: 4px; }
+  .profile-card__row {
+    min-height: 74px;
+    grid-template-columns: 28px 1fr;
+    grid-template-areas:
+      "icon label"
+      "icon value";
+    gap: 3px 10px;
+    align-content: center;
+  }
+  .profile-card__icon {
+    grid-area: icon;
+  }
+  .profile-card__label {
+    grid-area: label;
+  }
+  .profile-card__row strong,
+  .profile-card__row a {
+    grid-area: value;
+    font-size: 12px;
+  }
+  .profile-card__actions {
+    padding-top: 18px;
+    gap: 14px;
+  }
+  .profile-card__button {
+    min-width: 150px;
+  }
   .portfolio-section { padding: 72px 0; }
   .portfolio-section__head { margin-bottom: 34px; }
   .project-grid--private,
