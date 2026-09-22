@@ -2736,3 +2736,87 @@ footer a:hover { color: var(--cyan); }
     font-size: 14px;
   }
 }
+
+
+/* =========================================================
+   PROJECT RAIL — PADRÃO ÚNICO PRIVADO/PÚBLICO
+========================================================= */
+.project-rail {
+  grid-auto-columns: 740px;
+  scrollbar-width: none;
+  padding-bottom: 8px;
+}
+.project-rail::-webkit-scrollbar {
+  display: none;
+}
+.project-rail > .project-card {
+  scroll-snap-stop: always;
+}
+.project-rail .project-card {
+  height: 310px;
+  min-height: 310px;
+}
+.project-rail .project-visual {
+  min-height: 0;
+  height: 100%;
+}
+.project-rail .project-description {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+.project-rail .tech-list {
+  min-height: 27px;
+  max-height: 58px;
+  overflow: hidden;
+}
+
+.project-rail-scrollbar {
+  position: relative;
+  width: 100%;
+  height: 7px;
+  margin-top: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #0d1721;
+  border: 1px solid #1c2c3d;
+}
+.project-rail-scrollbar > span {
+  position: absolute;
+  inset: 0 auto 0 0;
+  min-width: 44px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #176fca, #2d9cff);
+  box-shadow: 0 0 14px rgba(22,133,255,.25);
+  cursor: grab;
+  touch-action: none;
+  will-change: transform;
+}
+.project-rail-scrollbar > span:active {
+  cursor: grabbing;
+}
+
+@media (max-width: 980px) {
+  .project-rail {
+    grid-auto-columns: 620px;
+  }
+  .project-rail .project-card {
+    height: 310px;
+    min-height: 310px;
+  }
+}
+
+@media (max-width: 700px) {
+  .project-rail {
+    grid-auto-columns: 88vw;
+  }
+  .project-rail .project-card {
+    height: 500px;
+    min-height: 500px;
+  }
+  .project-rail-scrollbar {
+    margin-right: 20px;
+    width: calc(100% - 20px);
+  }
+}
