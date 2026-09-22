@@ -6,6 +6,8 @@ import ProjectCard from '../components/ProjectCard.astro'
 import { curatedPublicProjects, privateCases } from '../data/projects'
 
 const githubProfile = 'https://github.com/Pericles-cmyk'
+const linkedinProfile = 'https://www.linkedin.com/in/periclesdev/'
+const contactEmail = 'carllessonpericles.dev@outlook.com'
 const whatsapp = 'https://wa.me/5581994094491?text=Olá%20PericlesDev!%20Quero%20conversar%20sobre%20um%20projeto.'
 
 const capabilities = [
@@ -61,36 +63,81 @@ const process = [
         </div>
       </div>
 
-      <aside class="portfolio-hero__side" aria-label="Perfil e áreas de atuação">
-        <a
-          class="github-profile"
-          href={githubProfile}
-          target="_blank"
-          rel="noreferrer"
-          data-github-profile-link
-          aria-label="Abrir perfil no GitHub"
-        >
-          <img
-            class="github-profile__avatar"
-            src="https://github.com/Pericles-cmyk.png?size=320"
-            alt="Foto do perfil de PericlesDev no GitHub"
-            width="176"
-            height="176"
-            data-github-avatar
-          />
-          <div class="github-profile__identity">
-            <strong data-github-name>PericlesDev</strong>
-            <span data-github-login>@Pericles-cmyk</span>
-          </div>
-          <p class="github-profile__bio" data-github-bio hidden></p>
-          <span class="github-profile__link">GitHub ↗</span>
-        </a>
+      <aside class="portfolio-hero__side" aria-label="Perfil profissional e contato">
+        <section class="profile-card">
+          <div class="profile-card__top">
+            <a
+              class="profile-card__avatar-link"
+              href={githubProfile}
+              target="_blank"
+              rel="noreferrer"
+              data-github-profile-link
+              aria-label="Abrir perfil no GitHub"
+            >
+              <span class="profile-card__avatar-wrap">
+                <img
+                  class="profile-card__avatar"
+                  src="https://github.com/Pericles-cmyk.png?size=320"
+                  alt="Foto do perfil de Carllesson Pericles no GitHub"
+                  width="176"
+                  height="176"
+                  data-github-avatar
+                />
+                <span class="profile-card__status-dot" aria-hidden="true"></span>
+              </span>
+            </a>
 
-        <div class="portfolio-hero__disciplines">
-          <span>01 <strong>Produto & UX</strong></span>
-          <span>02 <strong>Desenvolvimento</strong></span>
-          <span>03 <strong>Dados & infraestrutura</strong></span>
-        </div>
+            <div class="profile-card__intro">
+              <span class="profile-card__availability">
+                <i aria-hidden="true"></i>
+                Disponível para novos projetos
+              </span>
+              <p class="profile-card__bio" data-github-bio hidden></p>
+            </div>
+          </div>
+
+          <div class="profile-card__rows">
+            <div class="profile-card__row">
+              <span class="profile-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M20 21a8 8 0 0 0-16 0M12 13a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/></svg>
+              </span>
+              <span class="profile-card__label">Nome completo</span>
+              <strong>Carllesson Pericles Da Silva Oliveira</strong>
+            </div>
+
+            <div class="profile-card__row">
+              <span class="profile-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              </span>
+              <span class="profile-card__label">Cidade</span>
+              <strong>Recife, Pernambuco · Brasil</strong>
+            </div>
+
+            <div class="profile-card__row">
+              <span class="profile-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M3 5h18v14H3z"/><path d="m3 7 9 6 9-6"/></svg>
+              </span>
+              <span class="profile-card__label">E-mail</span>
+              <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+            </div>
+
+            <div class="profile-card__row">
+              <span class="profile-card__icon profile-card__icon--linkedin" aria-hidden="true">in</span>
+              <span class="profile-card__label">LinkedIn</span>
+              <a href={linkedinProfile} target="_blank" rel="noreferrer">linkedin.com/in/periclesdev/ ↗</a>
+            </div>
+          </div>
+
+          <div class="profile-card__actions">
+            <a class="btn btn--primary profile-card__button" href={whatsapp} target="_blank" rel="noreferrer">
+              Conversar
+              <span aria-hidden="true">→</span>
+            </a>
+            <a class="profile-card__linkedin" href={linkedinProfile} target="_blank" rel="noreferrer">
+              Ver LinkedIn ↗
+            </a>
+          </div>
+        </section>
       </aside>
     </section>
 
