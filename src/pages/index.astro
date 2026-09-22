@@ -314,6 +314,23 @@ const process = [
     Cloudflare: 'CF',
   }
 
+  const techIcons: Record<string, string> = {
+    Astro: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/astro/astro-original.svg',
+    TypeScript: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg',
+    React: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg',
+    Vite: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg',
+    'Node.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg',
+    SQLite: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sqlite/sqlite-original.svg',
+    HTML: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
+    CSS: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg',
+    JavaScript: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg',
+    Supabase: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg',
+    PostgreSQL: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg',
+    Docker: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg',
+    Python: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg',
+    Cloudflare: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cloudflare/cloudflare-original.svg',
+  }
+
   function techKey(tech: string) {
     return tech.toLowerCase().replace(/[^a-z0-9]+/g, '-')
   }
@@ -397,8 +414,16 @@ const process = [
     description.className = 'project-description'
     description.textContent = repo.description || 'Projeto desenvolvido como parte da minha evolução profissional.'
 
+    const projectTech = document.createElement('div')
+    projectTech.className = 'project-tech'
+
+    const techHeading = document.createElement('span')
+    techHeading.className = 'project-tech__label'
+    techHeading.innerHTML = '<span aria-hidden="true">&lt;/&gt;</span> TECNOLOGIAS'
+
     const tech = document.createElement('div')
     tech.className = 'tech-list tech-list--branded'
+
     const technologies = [
       repo.language,
       ...repo.topics.filter((topic) => topic !== 'portfolio').slice(0, 4),
@@ -409,16 +434,29 @@ const process = [
       chip.className = 'tech-chip'
       chip.dataset.tech = techKey(item)
 
-      const icon = document.createElement('b')
-      icon.setAttribute('aria-hidden', 'true')
-      icon.textContent = techMarks[item] || '•'
+      const iconUrl = techIcons[item]
+      if (iconUrl) {
+        const icon = document.createElement('img')
+        icon.className = 'tech-chip__icon'
+        icon.src = iconUrl
+        icon.alt = ''
+        icon.loading = 'lazy'
+        icon.decoding = 'async'
+        chip.appendChild(icon)
+      } else {
+        const icon = document.createElement('b')
+        icon.setAttribute('aria-hidden', 'true')
+        icon.textContent = techMarks[item] || '•'
+        chip.appendChild(icon)
+      }
 
       const label = document.createElement('span')
       label.textContent = item
-
-      chip.append(icon, label)
+      chip.appendChild(label)
       tech.appendChild(chip)
     })
+
+    projectTech.append(techHeading, tech)
 
     const actions = document.createElement('div')
     actions.className = 'project-actions'
@@ -430,7 +468,7 @@ const process = [
       actions.appendChild(createAction('Ver código', repo.html_url))
     }
 
-    content.append(titleRow, description, tech, actions)
+    content.append(titleRow, description, projectTech, actions)
     article.append(visual, content)
     grid.appendChild(article)
   }
