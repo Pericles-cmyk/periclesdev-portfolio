@@ -14,6 +14,29 @@ const isManagement = project.slug === 'sistema-de-gestao'
 const statusLabel = project.kind === 'public' ? 'Projeto público' : project.liveUrl ? 'Online' : 'Case'
 const primaryUrl = detailUrl || project.liveUrl || project.repoUrl || '#'
 const primaryExternal = !detailUrl
+
+const techMarks: Record<string, string> = {
+  Astro: 'A',
+  TypeScript: 'TS',
+  React: '⚛',
+  Vite: 'V',
+  'Node.js': 'JS',
+  Express: 'EX',
+  SQLite: 'DB',
+  'Socket.IO': 'IO',
+  HTML: '5',
+  CSS: '3',
+  JavaScript: 'JS',
+  Supabase: 'S',
+  PostgreSQL: 'PG',
+  Realtime: 'RT',
+  Docker: 'D',
+  Python: 'Py',
+  Cloudflare: 'CF',
+}
+
+const techKey = (tech: string) =>
+  tech.toLowerCase().replace(/[^a-z0-9]+/g, '-')
 ---
 <article
   class:list={[
@@ -43,12 +66,13 @@ const primaryExternal = !detailUrl
     aria-label={`Abrir ${project.title}`}
   >
     {isManagement ? (
-      <div class="management-preview">
-        <img src="/projects/sistema-gestao/atendimentos.webp" alt="" loading="lazy" decoding="async" />
-        <div class="management-preview__overlay">
-          <span>Sistema de Gestão</span>
-          <strong>Operação centralizada</strong>
-        </div>
+      <div class="management-preview management-preview--logo">
+        <img
+          src="/projects/sistema-gestao/logo-card.webp"
+          alt="Logo do Sistema de Gestão"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
     ) : isLarissa ? (
       <div class="larissa-preview">
@@ -135,8 +159,13 @@ const primaryExternal = !detailUrl
 
     <p class="project-description">{project.description}</p>
 
-    <div class="tech-list">
-      {project.stack.slice(0, 5).map((tech) => <span>{tech}</span>)}
+    <div class="tech-list tech-list--branded" aria-label="Tecnologias utilizadas">
+      {project.stack.slice(0, 5).map((tech) => (
+        <span class="tech-chip" data-tech={techKey(tech)}>
+          <b aria-hidden="true">{techMarks[tech] || '•'}</b>
+          <span>{tech}</span>
+        </span>
+      ))}
     </div>
 
     <div class="project-actions">
