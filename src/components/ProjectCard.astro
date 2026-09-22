@@ -35,6 +35,23 @@ const techMarks: Record<string, string> = {
   Cloudflare: 'CF',
 }
 
+const techIcons: Record<string, string> = {
+  Astro: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/astro/astro-original.svg',
+  TypeScript: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg',
+  React: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg',
+  Vite: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg',
+  'Node.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg',
+  SQLite: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sqlite/sqlite-original.svg',
+  HTML: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
+  CSS: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg',
+  JavaScript: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg',
+  Supabase: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg',
+  PostgreSQL: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg',
+  Docker: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg',
+  Python: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg',
+  Cloudflare: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cloudflare/cloudflare-original.svg',
+}
+
 const techKey = (tech: string) =>
   tech.toLowerCase().replace(/[^a-z0-9]+/g, '-')
 ---
@@ -68,7 +85,7 @@ const techKey = (tech: string) =>
     {isManagement ? (
       <div class="management-preview management-preview--logo">
         <img
-          src="/projects/sistema-gestao/logo-card.webp"
+          src="/projects/sistema-gestao/logo-card-v2.webp"
           alt="Logo do Sistema de Gestão"
           loading="lazy"
           decoding="async"
@@ -159,13 +176,20 @@ const techKey = (tech: string) =>
 
     <p class="project-description">{project.description}</p>
 
-    <div class="tech-list tech-list--branded" aria-label="Tecnologias utilizadas">
-      {project.stack.slice(0, 5).map((tech) => (
-        <span class="tech-chip" data-tech={techKey(tech)}>
-          <b aria-hidden="true">{techMarks[tech] || '•'}</b>
-          <span>{tech}</span>
-        </span>
-      ))}
+    <div class="project-tech">
+      <span class="project-tech__label"><span aria-hidden="true">&lt;/&gt;</span> TECNOLOGIAS</span>
+      <div class="tech-list tech-list--branded" aria-label="Tecnologias utilizadas">
+        {project.stack.slice(0, 5).map((tech) => (
+          <span class="tech-chip" data-tech={techKey(tech)}>
+            {techIcons[tech] ? (
+              <img class="tech-chip__icon" src={techIcons[tech]} alt="" loading="lazy" decoding="async" />
+            ) : (
+              <b aria-hidden="true">{techMarks[tech] || '•'}</b>
+            )}
+            <span>{tech}</span>
+          </span>
+        ))}
+      </div>
     </div>
 
     <div class="project-actions">
