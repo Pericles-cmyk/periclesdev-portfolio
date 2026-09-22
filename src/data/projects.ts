@@ -64,7 +64,7 @@ export const curatedPublicProjects: PortfolioProject[] = [
   },
   {
     slug: 'unicesumar-parking',
-    title: 'Sistema de Estacionamento — UniCesumar',
+    title: 'Sistema de Estacionamento - UniCesumar',
     subtitle: 'Projeto acadêmico',
     description:
       'Sistema acadêmico de gerenciamento de estacionamento com registro de entrada e saída por placa, cálculo automático de tarifas, métricas em tempo real, histórico diário e versão CLI em Python.',
