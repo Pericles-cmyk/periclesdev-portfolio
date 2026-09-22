@@ -162,6 +162,9 @@ const process = [
           {privateCases.map((project) => <ProjectCard project={project} />)}
         </div>
         <button class="project-rail-button project-rail-button--next" type="button" aria-label="Próximos projetos" data-rail-next>→</button>
+        <div class="project-rail-scrollbar" aria-hidden="true" data-rail-scrollbar>
+          <span data-rail-thumb></span>
+        </div>
       </div>
     </section>
 
@@ -239,6 +242,9 @@ const process = [
           {curatedPublicProjects.map((project) => <ProjectCard project={project} />)}
         </div>
         <button class="project-rail-button project-rail-button--next" type="button" aria-label="Próximos projetos" data-rail-next>→</button>
+        <div class="project-rail-scrollbar" aria-hidden="true" data-rail-scrollbar>
+          <span data-rail-thumb></span>
+        </div>
       </div>
 
       <div class="public-work__footer">
@@ -406,15 +412,125 @@ const process = [
     const rail = shell.querySelector<HTMLElement>('[data-project-rail]')
     const previous = shell.querySelector<HTMLButtonElement>('[data-rail-prev]')
     const next = shell.querySelector<HTMLButtonElement>('[data-rail-next]')
+    const scrollbar = shell.querySelector<HTMLElement>('[data-rail-scrollbar]')
+    const thumb = shell.querySelector<HTMLElement>('[data-rail-thumb]')
+
+    if (!rail) return
+
+    const cards = () => Array.from(rail.querySelectorAll<HTMLElement>('.project-card'))
+
+    const cardStep = () => {
+      const items = cards()
+      if (!items.length) return rail.clientWidth
+      if (items.length === 1) return items[0].getBoundingClientRect().width
+
+      const first = items[0].getBoundingClientRect()
+      const second = items[1].getBoundingClientRect()
+      return Math.max(second.left - first.left, first.width)
+    }
+
+    const currentIndex = () => {
+      const step = cardStep()
+      return step > 0 ? Math.round(rail.scrollLeft / step) : 0
+    }
+
+    const scrollToIndex = (index: number, behavior: ScrollBehavior = 'smooth') => {
+      const items = cards()
+      if (!items.length) return
+      const target = Math.max(0, Math.min(index, items.length - 1))
+      rail.scrollTo({ left: target * cardStep(), behavior })
+    }
 
     const move = (direction: number) => {
-      if (!rail) return
-      const amount = Math.max(rail.clientWidth * 0.82, 360)
-      rail.scrollBy({ left: amount * direction, behavior: 'smooth' })
+      scrollToIndex(currentIndex() + direction)
     }
+
+    let wheelLocked = false
+    rail.addEventListener(
+      'wheel',
+      (event) => {
+        const horizontalIntent = Math.abs(event.deltaX) > Math.abs(event.deltaY) || event.shiftKey
+        if (!horizontalIntent) return
+
+        event.preventDefault()
+        if (wheelLocked) return
+
+        const delta = event.deltaX || event.deltaY
+        move(delta > 0 ? 1 : -1)
+        wheelLocked = true
+        window.setTimeout(() => {
+          wheelLocked = false
+        }, 360)
+      },
+      { passive: false },
+    )
 
     previous?.addEventListener('click', () => move(-1))
     next?.addEventListener('click', () => move(1))
+
+    const updateScrollbar = () => {
+      if (!scrollbar || !thumb) return
+
+      const items = cards()
+      if (!items.length) {
+        scrollbar.hidden = true
+        return
+      }
+
+      scrollbar.hidden = false
+      const cardWidth = items[0].getBoundingClientRect().width
+      const trackWidth = scrollbar.clientWidth
+      const thumbWidth = Math.min(cardWidth, trackWidth)
+      const maxScroll = Math.max(rail.scrollWidth - rail.clientWidth, 0)
+      const maxTravel = Math.max(trackWidth - thumbWidth, 0)
+      const ratio = maxScroll > 0 ? rail.scrollLeft / maxScroll : 0
+
+      thumb.style.width = `${thumbWidth}px`
+      thumb.style.transform = `translateX(${ratio * maxTravel}px)`
+    }
+
+    let frame = 0
+    rail.addEventListener('scroll', () => {
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(updateScrollbar)
+    })
+
+    let dragging = false
+    let dragStartX = 0
+    let dragStartScroll = 0
+
+    thumb?.addEventListener('pointerdown', (event) => {
+      dragging = true
+      dragStartX = event.clientX
+      dragStartScroll = rail.scrollLeft
+      thumb.setPointerCapture(event.pointerId)
+    })
+
+    thumb?.addEventListener('pointermove', (event) => {
+      if (!dragging || !scrollbar || !thumb) return
+
+      const maxScroll = Math.max(rail.scrollWidth - rail.clientWidth, 0)
+      const maxTravel = Math.max(scrollbar.clientWidth - thumb.getBoundingClientRect().width, 1)
+      const delta = event.clientX - dragStartX
+
+      rail.scrollLeft = dragStartScroll + (delta / maxTravel) * maxScroll
+    })
+
+    const finishDrag = (event: PointerEvent) => {
+      if (!dragging) return
+      dragging = false
+      thumb?.releasePointerCapture(event.pointerId)
+      scrollToIndex(currentIndex())
+    }
+
+    thumb?.addEventListener('pointerup', finishDrag)
+    thumb?.addEventListener('pointercancel', finishDrag)
+
+    const observer = new MutationObserver(updateScrollbar)
+    observer.observe(rail, { childList: true })
+
+    window.addEventListener('resize', updateScrollbar)
+    requestAnimationFrame(updateScrollbar)
   })
 
   fetch('/api/github-projects')
