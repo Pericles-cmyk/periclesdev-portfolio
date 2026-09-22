@@ -418,54 +418,55 @@ const process = [
 
     const cards = () => Array.from(rail.querySelectorAll<HTMLElement>('.project-card'))
 
-    const cardStep = () => {
-      const items = cards()
-      if (!items.length) return rail.clientWidth
-      if (items.length === 1) return items[0].getBoundingClientRect().width
-
-      const first = items[0].getBoundingClientRect()
-      const second = items[1].getBoundingClientRect()
-      return Math.max(second.left - first.left, first.width)
+    const cardPositions = () => {
+      const railRect = rail.getBoundingClientRect()
+      return cards().map((card) => {
+        const rect = card.getBoundingClientRect()
+        return rect.left - railRect.left + rail.scrollLeft
+      })
     }
 
-    const currentIndex = () => {
-      const step = cardStep()
-      return step > 0 ? Math.round(rail.scrollLeft / step) : 0
+    const prepareRailEndSpace = () => {
+      const items = cards()
+      if (!items.length) return
+
+      const cardWidth = items[0].getBoundingClientRect().width
+      const endSpace = Math.max(0, rail.clientWidth - cardWidth)
+      rail.style.paddingRight = `${endSpace}px`
+    }
+
+    const nearestIndex = () => {
+      const positions = cardPositions()
+      if (!positions.length) return 0
+
+      let nearest = 0
+      let distance = Number.POSITIVE_INFINITY
+
+      positions.forEach((position, index) => {
+        const currentDistance = Math.abs(position - rail.scrollLeft)
+        if (currentDistance < distance) {
+          distance = currentDistance
+          nearest = index
+        }
+      })
+
+      return nearest
     }
 
     const scrollToIndex = (index: number, behavior: ScrollBehavior = 'smooth') => {
-      const items = cards()
-      if (!items.length) return
-      const target = Math.max(0, Math.min(index, items.length - 1))
-      rail.scrollTo({ left: target * cardStep(), behavior })
+      const positions = cardPositions()
+      if (!positions.length) return
+
+      const targetIndex = Math.max(0, Math.min(index, positions.length - 1))
+      rail.scrollTo({
+        left: positions[targetIndex],
+        behavior,
+      })
     }
 
     const move = (direction: number) => {
-      scrollToIndex(currentIndex() + direction)
+      scrollToIndex(nearestIndex() + direction)
     }
-
-    let wheelLocked = false
-    rail.addEventListener(
-      'wheel',
-      (event) => {
-        const horizontalIntent = Math.abs(event.deltaX) > Math.abs(event.deltaY) || event.shiftKey
-        if (!horizontalIntent) return
-
-        event.preventDefault()
-        if (wheelLocked) return
-
-        const delta = event.deltaX || event.deltaY
-        move(delta > 0 ? 1 : -1)
-        wheelLocked = true
-        window.setTimeout(() => {
-          wheelLocked = false
-        }, 360)
-      },
-      { passive: false },
-    )
-
-    previous?.addEventListener('click', () => move(-1))
-    next?.addEventListener('click', () => move(1))
 
     const updateScrollbar = () => {
       if (!scrollbar || !thumb) return
@@ -477,59 +478,117 @@ const process = [
       }
 
       scrollbar.hidden = false
+
       const cardWidth = items[0].getBoundingClientRect().width
       const trackWidth = scrollbar.clientWidth
       const thumbWidth = Math.min(cardWidth, trackWidth)
-      const maxScroll = Math.max(rail.scrollWidth - rail.clientWidth, 0)
       const maxTravel = Math.max(trackWidth - thumbWidth, 0)
-      const ratio = maxScroll > 0 ? rail.scrollLeft / maxScroll : 0
+      const totalSteps = Math.max(items.length - 1, 1)
+      const activeIndex = nearestIndex()
+      const discretePosition = items.length > 1
+        ? (activeIndex / totalSteps) * maxTravel
+        : 0
 
       thumb.style.width = `${thumbWidth}px`
-      thumb.style.transform = `translateX(${ratio * maxTravel}px)`
+      thumb.style.transform = `translateX(${discretePosition}px)`
     }
 
-    let frame = 0
+    const snapToNearest = (behavior: ScrollBehavior = 'smooth') => {
+      scrollToIndex(nearestIndex(), behavior)
+    }
+
+    let wheelLocked = false
+    rail.addEventListener(
+      'wheel',
+      (event) => {
+        const horizontalIntent =
+          Math.abs(event.deltaX) > Math.abs(event.deltaY) || event.shiftKey
+
+        if (!horizontalIntent) return
+
+        event.preventDefault()
+        if (wheelLocked) return
+
+        const delta = event.deltaX || event.deltaY
+        move(delta > 0 ? 1 : -1)
+
+        wheelLocked = true
+        window.setTimeout(() => {
+          wheelLocked = false
+        }, 420)
+      },
+      { passive: false },
+    )
+
+    previous?.addEventListener('click', () => move(-1))
+    next?.addEventListener('click', () => move(1))
+
+    let scrollIdle = 0
+    let animationFrame = 0
+
     rail.addEventListener('scroll', () => {
-      cancelAnimationFrame(frame)
-      frame = requestAnimationFrame(updateScrollbar)
+      cancelAnimationFrame(animationFrame)
+      animationFrame = requestAnimationFrame(updateScrollbar)
+
+      window.clearTimeout(scrollIdle)
+      scrollIdle = window.setTimeout(() => {
+        snapToNearest()
+      }, 140)
     })
 
-    let dragging = false
-    let dragStartX = 0
-    let dragStartScroll = 0
+    let draggingThumb = false
 
-    thumb?.addEventListener('pointerdown', (event) => {
-      dragging = true
-      dragStartX = event.clientX
-      dragStartScroll = rail.scrollLeft
-      thumb.setPointerCapture(event.pointerId)
-    })
+    const indexFromPointer = (clientX: number) => {
+      const items = cards()
+      if (!scrollbar || !thumb || !items.length) return 0
 
-    thumb?.addEventListener('pointermove', (event) => {
-      if (!dragging || !scrollbar || !thumb) return
+      const trackRect = scrollbar.getBoundingClientRect()
+      const thumbWidth = thumb.getBoundingClientRect().width
+      const usable = Math.max(trackRect.width - thumbWidth, 1)
+      const thumbCenterTarget = clientX - trackRect.left - thumbWidth / 2
+      const ratio = Math.max(0, Math.min(1, thumbCenterTarget / usable))
 
-      const maxScroll = Math.max(rail.scrollWidth - rail.clientWidth, 0)
-      const maxTravel = Math.max(scrollbar.clientWidth - thumb.getBoundingClientRect().width, 1)
-      const delta = event.clientX - dragStartX
-
-      rail.scrollLeft = dragStartScroll + (delta / maxTravel) * maxScroll
-    })
-
-    const finishDrag = (event: PointerEvent) => {
-      if (!dragging) return
-      dragging = false
-      thumb?.releasePointerCapture(event.pointerId)
-      scrollToIndex(currentIndex())
+      return Math.round(ratio * Math.max(items.length - 1, 0))
     }
 
-    thumb?.addEventListener('pointerup', finishDrag)
-    thumb?.addEventListener('pointercancel', finishDrag)
+    const selectFromPointer = (clientX: number, behavior: ScrollBehavior) => {
+      const index = indexFromPointer(clientX)
+      scrollToIndex(index, behavior)
+      updateScrollbar()
+    }
 
-    const observer = new MutationObserver(updateScrollbar)
+    scrollbar?.addEventListener('pointerdown', (event) => {
+      draggingThumb = true
+      scrollbar.setPointerCapture(event.pointerId)
+      selectFromPointer(event.clientX, 'auto')
+    })
+
+    scrollbar?.addEventListener('pointermove', (event) => {
+      if (!draggingThumb) return
+      selectFromPointer(event.clientX, 'auto')
+    })
+
+    const finishScrollbarDrag = (event: PointerEvent) => {
+      if (!draggingThumb) return
+      draggingThumb = false
+      scrollbar?.releasePointerCapture(event.pointerId)
+      snapToNearest('smooth')
+    }
+
+    scrollbar?.addEventListener('pointerup', finishScrollbarDrag)
+    scrollbar?.addEventListener('pointercancel', finishScrollbarDrag)
+
+    const refreshRail = () => {
+      prepareRailEndSpace()
+      snapToNearest('auto')
+      requestAnimationFrame(updateScrollbar)
+    }
+
+    const observer = new MutationObserver(refreshRail)
     observer.observe(rail, { childList: true })
 
-    window.addEventListener('resize', updateScrollbar)
-    requestAnimationFrame(updateScrollbar)
+    window.addEventListener('resize', refreshRail)
+    requestAnimationFrame(refreshRail)
   })
 
   fetch('/api/github-projects')
