@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 430" role="img" aria-labelledby="title desc">
+  <title id="title">Sistema de Gestão</title>
+  <desc id="desc">Símbolo padrão azul do Sistema de Gestão</desc>
+  <defs>
+    <linearGradient id="blueTop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1d74ff"/>
+      <stop offset="0.55" stop-color="#0754d9"/>
+      <stop offset="1" stop-color="#032d7a"/>
+    </linearGradient>
+    <linearGradient id="blueBottom" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#00328d"/>
+      <stop offset="0.55" stop-color="#075bdc"/>
+      <stop offset="1" stop-color="#15d4ff"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1edcff"/>
+      <stop offset="1" stop-color="#0b87ff"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(15 10)">
+    <path d="M150 0 315 86c18 9 18 34 0 43L171 204c-14 7-31 6-44-3L20 133C4 123 4 99 20 90L126 20c7-5 15-9 24-20Z" fill="url(#blueTop)"/>
+    <path d="M31 183 126 128c13-8 29-8 42 0l52 30-96 58c-10 6-22 7-33 4l-61-17c-10-3-11-15 1-20Z" fill="#17283b"/>
+    <path d="m282 149-78 47 84 50c12 7 27 6 38-2l26-19c12-9 11-27-2-35l-68-41Z" fill="#17283b"/>
+    <path d="M53 210 155 270c11 7 25 7 36 0l86-51 84 51c17 10 18 34 2 45l-141 89c-13 8-30 9-43 1L23 313c-19-11-19-39 0-50l30-18c13-8 29-8 42 0l82 48 42-25-77-46c-12-7-27-7-39 0l-50 29Z" fill="url(#blueBottom)"/>
+    <path d="M150 177 244 231 205 254l-94-55 39-22Z" fill="url(#cyan)"/>
+  </g>
+</svg>
