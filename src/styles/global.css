@@ -2863,3 +2863,54 @@ footer a:hover { color: var(--cyan); }
     padding: 17px 18px;
   }
 }
+
+
+/* =========================================================
+   PROJECT RAIL — CONTROLES SOMENTE NO HOVER
+========================================================= */
+.project-rail-button,
+.project-rail-scrollbar {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity .18s ease,
+    visibility .18s ease,
+    transform .18s ease;
+}
+
+.project-rail-shell--scrollable:hover .project-rail-button,
+.project-rail-shell--scrollable:hover .project-rail-scrollbar,
+.project-rail-shell--scrollable:focus-within .project-rail-button,
+.project-rail-shell--scrollable:focus-within .project-rail-scrollbar {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.project-rail-shell--scrollable:hover .project-rail-button--prev,
+.project-rail-shell--scrollable:focus-within .project-rail-button--prev {
+  transform: translateY(-50%);
+}
+
+.project-rail-shell--scrollable:hover .project-rail-button--next,
+.project-rail-shell--scrollable:focus-within .project-rail-button--next {
+  transform: translateY(-50%);
+}
+
+.project-rail-scrollbar {
+  user-select: none;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .project-rail-button,
+  .project-rail-scrollbar,
+  .project-rail-shell--scrollable:hover .project-rail-button,
+  .project-rail-shell--scrollable:hover .project-rail-scrollbar,
+  .project-rail-shell--scrollable:focus-within .project-rail-button,
+  .project-rail-shell--scrollable:focus-within .project-rail-scrollbar {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
