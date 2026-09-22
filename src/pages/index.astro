@@ -412,20 +412,20 @@ const process = [
     let activeIndex = 0
     let wheelLocked = false
 
+    const visibleCount = () => {
+      if (window.matchMedia('(max-width: 700px)').matches) return 1
+      if (window.matchMedia('(max-width: 980px)').matches) return 2
+      return 3
+    }
+
+    const maxIndex = () => Math.max(cards().length - visibleCount(), 0)
+
     const cardPositions = () => {
       const railRect = rail.getBoundingClientRect()
       return cards().map((card) => {
         const rect = card.getBoundingClientRect()
         return rect.left - railRect.left + rail.scrollLeft
       })
-    }
-
-    const prepareRailEndSpace = () => {
-      const items = cards()
-      if (!items.length) return
-
-      const cardWidth = items[0].getBoundingClientRect().width
-      rail.style.paddingRight = `${Math.max(0, rail.clientWidth - cardWidth)}px`
     }
 
     const nearestIndex = () => {
@@ -436,6 +436,8 @@ const process = [
       let distance = Number.POSITIVE_INFINITY
 
       positions.forEach((position, index) => {
+        if (index > maxIndex()) return
+
         const currentDistance = Math.abs(position - rail.scrollLeft)
         if (currentDistance < distance) {
           distance = currentDistance
@@ -447,23 +449,22 @@ const process = [
     }
 
     const updateControls = () => {
-      const items = cards()
-      const hasMultiple = items.length > 1
+      const canNavigate = cards().length > visibleCount()
 
-      shell.classList.toggle('project-rail-shell--scrollable', hasMultiple)
+      shell.classList.toggle('project-rail-shell--scrollable', canNavigate)
 
-      if (previous) previous.disabled = !hasMultiple || activeIndex <= 0
-      if (next) next.disabled = !hasMultiple || activeIndex >= items.length - 1
+      if (previous) previous.disabled = !canNavigate || activeIndex <= 0
+      if (next) next.disabled = !canNavigate || activeIndex >= maxIndex()
     }
 
     const scrollToIndex = (index: number, behavior: ScrollBehavior = 'smooth') => {
       const positions = cardPositions()
       if (!positions.length) return
 
-      activeIndex = Math.max(0, Math.min(index, positions.length - 1))
+      activeIndex = Math.max(0, Math.min(index, maxIndex()))
 
       rail.scrollTo({
-        left: positions[activeIndex],
+        left: positions[activeIndex] ?? 0,
         behavior,
       })
 
@@ -483,7 +484,7 @@ const process = [
         const horizontalIntent =
           Math.abs(event.deltaX) > Math.abs(event.deltaY) || event.shiftKey
 
-        if (!horizontalIntent) return
+        if (!horizontalIntent || cards().length <= visibleCount()) return
 
         event.preventDefault()
         if (wheelLocked) return
@@ -511,8 +512,8 @@ const process = [
     })
 
     const refreshRail = () => {
-      prepareRailEndSpace()
-      activeIndex = Math.min(activeIndex, Math.max(cards().length - 1, 0))
+      rail.style.paddingRight = '0px'
+      activeIndex = Math.min(activeIndex, maxIndex())
       scrollToIndex(activeIndex, 'auto')
       updateControls()
     }
