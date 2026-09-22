@@ -2820,3 +2820,46 @@ footer a:hover { color: var(--cyan); }
     width: calc(100% - 20px);
   }
 }
+
+
+/* =========================================================
+   ATUAÇÃO — ALTURA PADRONIZADA COM OS PROJETOS
+========================================================= */
+.portfolio-capabilities {
+  scroll-margin-top: 0;
+}
+.capability-card {
+  height: 310px;
+  min-height: 310px;
+  display: grid;
+  grid-template-rows: 56% 44%;
+}
+.capability-card__media {
+  height: 100%;
+  aspect-ratio: auto;
+}
+.capability-card__content {
+  min-height: 0;
+  padding: 18px 20px;
+  justify-content: flex-start;
+}
+.capability-card p {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+@media (max-width: 700px) {
+  .capability-card {
+    height: 310px;
+    min-height: 310px;
+  }
+  .capability-card__media {
+    aspect-ratio: auto;
+  }
+  .capability-card__content {
+    min-height: 0;
+    padding: 17px 18px;
+  }
+}
