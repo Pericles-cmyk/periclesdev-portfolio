@@ -580,6 +580,13 @@ const process = [
 
     const refreshRail = () => {
       prepareRailEndSpace()
+
+      const items = cards()
+      const hasOverflow =
+        items.length > 1 && rail.scrollWidth > rail.clientWidth + 2
+
+      shell.classList.toggle('project-rail-shell--scrollable', hasOverflow)
+
       snapToNearest('auto')
       requestAnimationFrame(updateScrollbar)
     }
