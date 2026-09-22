@@ -38,10 +38,10 @@ const capabilities = [
 ]
 
 const process = [
-  ['01', 'Entender', 'Mapeio operação, usuário e objetivo antes de escolher a tecnologia.'],
-  ['02', 'Desenhar', 'Organizo fluxos e interface para reduzir atrito no uso diário.'],
-  ['03', 'Construir', 'Desenvolvo frontend, backend, dados e integrações necessárias.'],
-  ['04', 'Implantar', 'Configuro ambiente, domínio, infraestrutura e entrega da solução.'],
+  { number: '01', title: 'Entender', description: 'Mapeio operação, usuário e objetivo antes de escolher a tecnologia.', icon: '⌕' },
+  { number: '02', title: 'Desenhar', description: 'Organizo fluxos e interface para reduzir atrito no uso diário.', icon: '▱' },
+  { number: '03', title: 'Construir', description: 'Desenvolvo frontend, backend, dados e integrações necessárias.', icon: '</>' },
+  { number: '04', title: 'Implantar', description: 'Configuro ambiente, domínio, infraestrutura e entrega da solução.', icon: '↗' },
 ]
 ---
 <BaseLayout>
@@ -156,8 +156,12 @@ const process = [
         </p>
       </header>
 
-      <div class="project-grid project-grid--private">
-        {privateCases.map((project) => <ProjectCard project={project} />)}
+      <div class="project-rail-shell">
+        <button class="project-rail-button project-rail-button--prev" type="button" aria-label="Projetos anteriores" data-rail-prev>←</button>
+        <div class="project-rail" data-project-rail>
+          {privateCases.map((project) => <ProjectCard project={project} />)}
+        </div>
+        <button class="project-rail-button project-rail-button--next" type="button" aria-label="Próximos projetos" data-rail-next>→</button>
       </div>
     </section>
 
@@ -199,11 +203,15 @@ const process = [
       </header>
 
       <div class="process-list">
-        {process.map(([number, title, description]) => (
+        {process.map((step) => (
           <article class="process-item">
-            <span>{number}</span>
-            <h3>{title}</h3>
-            <p>{description}</p>
+            <div class="process-item__visual" aria-hidden="true">
+              <span>{step.icon}</span>
+              <i></i><i></i><i></i>
+            </div>
+            <span class="process-item__number">{step.number}</span>
+            <h3>{step.title}</h3>
+            <p>{step.description}</p>
           </article>
         ))}
       </div>
@@ -225,8 +233,12 @@ const process = [
         </p>
       </header>
 
-      <div class="project-grid project-grid--public" data-github-grid>
-        {curatedPublicProjects.map((project) => <ProjectCard project={project} />)}
+      <div class="project-rail-shell">
+        <button class="project-rail-button project-rail-button--prev" type="button" aria-label="Projetos anteriores" data-rail-prev>←</button>
+        <div class="project-rail" data-project-rail data-github-grid>
+          {curatedPublicProjects.map((project) => <ProjectCard project={project} />)}
+        </div>
+        <button class="project-rail-button project-rail-button--next" type="button" aria-label="Próximos projetos" data-rail-next>→</button>
       </div>
 
       <div class="public-work__footer">
@@ -283,6 +295,23 @@ const process = [
       .replace(/\b\w/g, (letter) => letter.toUpperCase())
   }
 
+  function createAction(label: string, href: string, primary = false) {
+    const link = document.createElement('a')
+    link.className = primary
+      ? 'project-action project-action--primary'
+      : 'project-action project-action--secondary'
+    link.href = href
+    link.target = '_blank'
+    link.rel = 'noreferrer'
+
+    const icon = document.createElement('span')
+    icon.setAttribute('aria-hidden', 'true')
+    icon.textContent = primary ? '↗' : '⌘'
+
+    link.append(icon, document.createTextNode(label))
+    return link
+  }
+
   function addDynamicProject(repo: GithubProject) {
     if (!grid) return
 
@@ -318,19 +347,28 @@ const process = [
 
     visual.append(glow, browser, lines)
 
-    const head = document.createElement('div')
-    head.className = 'project-card__head'
+    const content = document.createElement('div')
+    content.className = 'project-card__content'
 
-    const headText = document.createElement('div')
+    const titleRow = document.createElement('div')
+    titleRow.className = 'project-card__title-row'
+
+    const titleGroup = document.createElement('div')
     const category = document.createElement('span')
     category.className = 'eyebrow'
     category.textContent = repo.topics.find((topic) => topic !== 'portfolio') || 'Projeto'
 
     const title = document.createElement('h3')
     title.textContent = titleFromRepo(repo.name)
+    titleGroup.append(category, title)
 
-    headText.append(category, title)
-    head.append(headText)
+    const status = document.createElement('span')
+    status.className = 'project-status project-status--public'
+    const statusDot = document.createElement('i')
+    statusDot.setAttribute('aria-hidden', 'true')
+    status.append(statusDot, document.createTextNode('Projeto público'))
+
+    titleRow.append(titleGroup, status)
 
     const description = document.createElement('p')
     description.className = 'project-description'
@@ -340,7 +378,7 @@ const process = [
     tech.className = 'tech-list'
     const technologies = [
       repo.language,
-      ...repo.topics.filter((topic) => topic !== 'portfolio').slice(0, 3),
+      ...repo.topics.filter((topic) => topic !== 'portfolio').slice(0, 4),
     ].filter(Boolean) as string[]
 
     technologies.forEach((item) => {
@@ -352,27 +390,32 @@ const process = [
     const actions = document.createElement('div')
     actions.className = 'project-actions'
 
+    const primaryUrl = repo.homepage || repo.html_url
+    actions.appendChild(createAction('Ver projeto', primaryUrl, true))
+
     if (repo.homepage) {
-      const live = document.createElement('a')
-      live.className = 'text-link'
-      live.href = repo.homepage
-      live.target = '_blank'
-      live.rel = 'noreferrer'
-      live.textContent = 'Ver projeto ↗'
-      actions.appendChild(live)
+      actions.appendChild(createAction('Ver código', repo.html_url))
     }
 
-    const code = document.createElement('a')
-    code.className = 'text-link text-link--secondary'
-    code.href = repo.html_url
-    code.target = '_blank'
-    code.rel = 'noreferrer'
-    code.textContent = 'Ver código ↗'
-    actions.appendChild(code)
-
-    article.append(visual, head, description, tech, actions)
+    content.append(titleRow, description, tech, actions)
+    article.append(visual, content)
     grid.appendChild(article)
   }
+
+  document.querySelectorAll<HTMLElement>('.project-rail-shell').forEach((shell) => {
+    const rail = shell.querySelector<HTMLElement>('[data-project-rail]')
+    const previous = shell.querySelector<HTMLButtonElement>('[data-rail-prev]')
+    const next = shell.querySelector<HTMLButtonElement>('[data-rail-next]')
+
+    const move = (direction: number) => {
+      if (!rail) return
+      const amount = Math.max(rail.clientWidth * 0.82, 360)
+      rail.scrollBy({ left: amount * direction, behavior: 'smooth' })
+    }
+
+    previous?.addEventListener('click', () => move(-1))
+    next?.addEventListener('click', () => move(1))
+  })
 
   fetch('/api/github-projects')
     .then((response) => {
