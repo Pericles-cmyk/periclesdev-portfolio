@@ -5,6 +5,12 @@ import Footer from '../components/Footer.astro'
 import ProjectCard from '../components/ProjectCard.astro'
 import { curatedPublicProjects, privateCases } from '../data/projects'
 
+const projects = [...privateCases, ...curatedPublicProjects].sort((a, b) => {
+  const aDevelopment = a.status === 'development' ? 1 : 0
+  const bDevelopment = b.status === 'development' ? 1 : 0
+  return bDevelopment - aDevelopment
+})
+
 const githubProfile = 'https://github.com/Pericles-cmyk'
 const linkedinProfile = 'https://www.linkedin.com/in/periclesdev/'
 const contactEmail = 'carllessonpericles.dev@outlook.com'
@@ -157,8 +163,8 @@ const process = [
 
       <div class="project-rail-shell">
         <button class="project-rail-button project-rail-button--prev" type="button" aria-label="Projetos anteriores" data-rail-prev>←</button>
-        <div class="project-rail" data-project-rail>
-          {privateCases.map((project) => <ProjectCard project={project} />)}
+        <div class="project-rail" data-project-rail data-github-grid>
+          {projects.map((project) => <ProjectCard project={project} />)}
         </div>
         <button class="project-rail-button project-rail-button--next" type="button" aria-label="Próximos projetos" data-rail-next>→</button>
       </div>
@@ -217,30 +223,6 @@ const process = [
       <div class="stack-line" aria-label="Tecnologias">
         {['Astro', 'TypeScript', 'React', 'Node.js', 'Supabase', 'PostgreSQL', 'SQLite', 'Cloudflare']
           .map((item) => <span>{item}</span>)}
-      </div>
-    </section>
-
-    <section class="portfolio-section public-work">
-      <header class="portfolio-section__head">
-        <div>
-          <span class="portfolio-kicker">OUTROS PROJETOS</span>
-          <h2>Projetos que também fazem parte da minha trajetória.</h2>
-        </div>
-        <p>
-          Estudos, experiências e soluções que mantenho disponíveis para consulta.
-        </p>
-      </header>
-
-      <div class="project-rail-shell">
-        <button class="project-rail-button project-rail-button--prev" type="button" aria-label="Projetos anteriores" data-rail-prev>←</button>
-        <div class="project-rail" data-project-rail data-github-grid>
-          {curatedPublicProjects.map((project) => <ProjectCard project={project} />)}
-        </div>
-        <button class="project-rail-button project-rail-button--next" type="button" aria-label="Próximos projetos" data-rail-next>→</button>
-      </div>
-
-      <div class="public-work__footer">
-        <a class="portfolio-link" href={githubProfile} target="_blank" rel="noreferrer">Ver mais projetos ↗</a>
       </div>
     </section>
 
@@ -405,7 +387,7 @@ const process = [
     status.className = 'project-status project-status--public'
     const statusDot = document.createElement('i')
     statusDot.setAttribute('aria-hidden', 'true')
-    status.append(statusDot, document.createTextNode('Projeto público'))
+    status.append(statusDot, document.createTextNode('Projeto'))
 
     titleRow.append(titleGroup, status)
 
