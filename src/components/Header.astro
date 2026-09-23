@@ -19,7 +19,7 @@ const githubAvatar = 'https://github.com/Pericles-cmyk.png?size=96'
 
   <nav class="nav-links" aria-label="Navegação principal">
     <a href="/#inicio" data-home-link>Início</a>
-    <a href="/#projetos">Projetos</a>
+    <a href="/#projetos" data-exact-section="projetos">Projetos</a>
     <a href="/#solucoes" data-exact-section="solucoes">Atuação</a>
     <a href="/#processo">Processo</a>
     <a href="/#sobre">Sobre</a>
@@ -91,6 +91,10 @@ const githubAvatar = 'https://github.com/Pericles-cmyk.png?size=96'
 
       event.preventDefault()
       placeExactSection(sectionId)
+
+      if (sectionId === 'projetos') {
+        window.dispatchEvent(new CustomEvent('portfolio:reset-projects'))
+      }
 
       nav?.classList.remove('nav-links--open')
       button?.setAttribute('aria-expanded', 'false')
