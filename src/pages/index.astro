@@ -64,7 +64,7 @@ const process = [
         </p>
 
         <div class="portfolio-hero__actions">
-          <a class="btn btn--primary" href="#projetos">Conhecer projetos</a>
+          <a class="btn btn--primary" href="#projetos" data-exact-section="projetos">Conhecer projetos</a>
           <a class="portfolio-link" href={whatsapp} target="_blank" rel="noreferrer">Falar sobre um projeto ↗</a>
         </div>
       </div>
@@ -529,6 +529,11 @@ const process = [
 
     previous?.addEventListener('click', () => move(-1))
     next?.addEventListener('click', () => move(1))
+
+    window.addEventListener('portfolio:reset-projects', () => {
+      activeIndex = 0
+      scrollToIndex(0, 'smooth')
+    })
 
     rail.addEventListener(
       'wheel',
