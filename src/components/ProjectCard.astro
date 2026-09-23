@@ -11,7 +11,15 @@ const isLarissa = project.slug === 'larissa-souza'
 const isJazi = project.slug === 'studio-jazi-lino'
 const isParking = project.slug === 'unicesumar-parking'
 const isManagement = project.slug === 'sistema-de-gestao'
-const statusLabel = project.kind === 'public' ? 'Projeto público' : project.liveUrl ? 'Online' : 'Case'
+const isKeyDeck = project.slug === 'keydeck'
+const isDevelopment = project.status === 'development'
+const statusLabel = isDevelopment
+  ? 'Em desenvolvimento'
+  : project.kind === 'public'
+    ? 'Projeto público'
+    : project.liveUrl
+      ? 'Online'
+      : 'Case'
 const primaryUrl = detailUrl || project.liveUrl || project.repoUrl || '#'
 const primaryExternal = !detailUrl
 
@@ -63,6 +71,8 @@ const techKey = (tech: string) =>
       'project-card--jazi': isJazi,
       'project-card--parking': isParking,
       'project-card--management': isManagement,
+      'project-card--keydeck': isKeyDeck,
+      'project-card--development': isDevelopment,
     },
   ]}
   data-repo-url={project.repoUrl || ''}
@@ -75,6 +85,7 @@ const techKey = (tech: string) =>
         'project-visual--jazi': isJazi,
         'project-visual--parking': isParking,
         'project-visual--management': isManagement,
+        'project-visual--keydeck': isKeyDeck,
       },
     ]}
     href={primaryUrl}
@@ -87,6 +98,15 @@ const techKey = (tech: string) =>
         <img
           src="/projects/sistema-gestao/logo.svg"
           alt="Logo do Sistema de Gestão"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    ) : isKeyDeck ? (
+      <div class="keydeck-preview">
+        <img
+          src="/projects/keydeck/logo.webp"
+          alt="Logo KeyDeck"
           loading="lazy"
           decoding="async"
         />
@@ -169,7 +189,13 @@ const techKey = (tech: string) =>
         <span class="eyebrow">{project.category}</span>
         <h3>{project.title}</h3>
       </div>
-      <span class:list={['project-status', { 'project-status--public': project.kind === 'public' }]}>
+      <span class:list={[
+        'project-status',
+        {
+          'project-status--public': project.kind === 'public' && !isDevelopment,
+          'project-status--development': isDevelopment,
+        },
+      ]}>
         <i aria-hidden="true"></i>{statusLabel}
       </span>
     </div>
@@ -192,30 +218,32 @@ const techKey = (tech: string) =>
       </div>
     </div>
 
-    <div class="project-actions">
-      <a
-        class="project-action project-action--primary"
-        href={primaryUrl}
-        target={primaryExternal ? '_blank' : undefined}
-        rel={primaryExternal ? 'noreferrer' : undefined}
-      >
-        <span aria-hidden="true">↗</span>
-        Ver projeto
-      </a>
-
-      {project.kind === 'private' && project.liveUrl && (
-        <a class="project-action project-action--secondary" href={project.liveUrl} target="_blank" rel="noreferrer">
-          <span aria-hidden="true">◎</span>
-          Visitar
+    {!project.hideActions && (
+      <div class="project-actions">
+        <a
+          class="project-action project-action--primary"
+          href={primaryUrl}
+          target={primaryExternal ? '_blank' : undefined}
+          rel={primaryExternal ? 'noreferrer' : undefined}
+        >
+          <span aria-hidden="true">↗</span>
+          Ver projeto
         </a>
-      )}
 
-      {project.kind === 'public' && project.liveUrl && project.repoUrl && (
-        <a class="project-action project-action--secondary" href={project.repoUrl} target="_blank" rel="noreferrer">
-          <span aria-hidden="true">⌘</span>
-          Ver código
-        </a>
-      )}
-    </div>
+        {project.kind === 'private' && project.liveUrl && (
+          <a class="project-action project-action--secondary" href={project.liveUrl} target="_blank" rel="noreferrer">
+            <span aria-hidden="true">◎</span>
+            Visitar
+          </a>
+        )}
+
+        {project.kind === 'public' && project.liveUrl && project.repoUrl && (
+          <a class="project-action project-action--secondary" href={project.repoUrl} target="_blank" rel="noreferrer">
+            <span aria-hidden="true">⌘</span>
+            Ver código
+          </a>
+        )}
+      </div>
+    )}
   </div>
 </article>
