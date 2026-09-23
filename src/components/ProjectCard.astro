@@ -15,11 +15,9 @@ const isKeyDeck = project.slug === 'keydeck'
 const isDevelopment = project.status === 'development'
 const statusLabel = isDevelopment
   ? 'Em desenvolvimento'
-  : project.kind === 'public'
-    ? 'Projeto público'
-    : project.liveUrl
-      ? 'Online'
-      : 'Case'
+  : project.liveUrl
+    ? 'Online'
+    : 'Projeto'
 const primaryUrl = detailUrl || project.liveUrl || project.repoUrl || '#'
 const primaryExternal = !detailUrl
 
@@ -192,7 +190,6 @@ const techKey = (tech: string) =>
       <span class:list={[
         'project-status',
         {
-          'project-status--public': project.kind === 'public' && !isDevelopment,
           'project-status--development': isDevelopment,
         },
       ]}>
