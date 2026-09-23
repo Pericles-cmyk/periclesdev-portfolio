@@ -9,6 +9,8 @@ export interface PortfolioProject {
   liveUrl?: string
   repoUrl?: string
   featured?: boolean
+  status?: 'development' | 'online' | 'case' | 'public'
+  hideActions?: boolean
 }
 
 export const privateCases: PortfolioProject[] = [
@@ -21,6 +23,19 @@ export const privateCases: PortfolioProject[] = [
     stack: ['React', 'Vite', 'Node.js', 'Express', 'SQLite', 'Socket.IO'],
     category: 'Sistema de gestão',
     kind: 'private',
+    featured: true,
+  },
+  {
+    slug: 'keydeck',
+    title: 'KeyDeck',
+    subtitle: 'Ferramenta de produtividade em desenvolvimento',
+    description:
+      'Projeto em desenvolvimento focado em organização, acesso rápido e experiência moderna em um painel intuitivo.',
+    stack: ['React', 'TypeScript', 'Vite', 'Node.js'],
+    category: 'Ferramenta / Produtividade',
+    kind: 'private',
+    status: 'development',
+    hideActions: true,
     featured: true,
   },
   {
