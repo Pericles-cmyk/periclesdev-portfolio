@@ -189,40 +189,76 @@
 }
 
 
-/* Nuvkey — projeto em desenvolvimento */
-.project-card--nuvkey{
+/* Padrão hero compartilhado — projetos com apenas logo */
+.project-card--nuvkey,
+.project-card--management{
   background:
     radial-gradient(circle at 100% 0%, rgba(0,194,255,.08), transparent 36%),
     var(--surface);
 }
 
-.project-visual--nuvkey{
+.project-visual--nuvkey,
+.project-visual--management{
   border-color:#1e3955;
-  background:#000;
+  background:#08111b;
 }
 
-.nuvkey-preview{
+.project-logo-hero{
   position:absolute;
   inset:0;
-  display:grid;
-  place-items:center;
-  padding:0;
-  background:#08111b;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+  padding:22px 18px 24px;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(0,174,255,.10), transparent 44%),
+    #08111b;
   overflow:hidden;
 }
 
-.nuvkey-preview img{
-  width:100%;
-  height:100%;
+.project-logo-hero img{
+  width:auto;
+  height:auto;
+  max-width:68%;
+  max-height:58%;
   display:block;
-  object-fit:cover;
+  object-fit:contain;
   object-position:center;
   filter:none;
   transform:none;
   image-rendering:auto;
 }
 
-.project-card--nuvkey:hover .nuvkey-preview img{
+.project-logo-hero--management img{
+  max-width:74%;
+  max-height:60%;
+}
+
+.project-logo-hero--nuvkey img{
+  max-width:66%;
+  max-height:58%;
+}
+
+.project-logo-hero__name{
+  display:block;
+  width:100%;
+  margin:0;
+  padding:0 6px;
+  color:#fff;
+  font-size:21px;
+  font-weight:800;
+  line-height:1.08;
+  letter-spacing:-.025em;
+  text-align:center;
+  white-space:normal;
+  overflow:visible;
+  text-wrap:balance;
+}
+
+.project-card--management:hover .project-logo-hero img,
+.project-card--nuvkey:hover .project-logo-hero img{
   transform:none;
   filter:none;
 }
@@ -249,76 +285,27 @@
 }
 
 @media (max-width:700px){
-  .nuvkey-preview{
-    padding:0;
-  }
-  .nuvkey-preview img{
-    width:100%;
-    height:100%;
-  }
-}
-
-
-/* Sistema de Gestão — padrão de apresentação dos cards */
-.project-visual--management .management-preview--logo{
-  position:absolute;
-  inset:0;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:18px;
-  padding:24px 16px;
-  background:#000 !important;
-  overflow:hidden;
-}
-
-.project-visual--management .management-preview--logo img{
-  width:auto;
-  height:auto;
-  max-width:82% !important;
-  max-height:60% !important;
-  display:block;
-  object-fit:contain;
-  object-position:center;
-  filter:none !important;
-  transform:none !important;
-}
-
-.project-card--management:hover .management-preview--logo img{
-  transform:none !important;
-  filter:none !important;
-}
-
-.management-preview__name{
-  display:block;
-  width:100%;
-  max-width:100%;
-  margin:0;
-  padding:0 4px;
-  color:#fff;
-  font-size:20px;
-  font-weight:800;
-  line-height:1.08;
-  letter-spacing:-.025em;
-  text-align:center;
-  white-space:normal;
-  overflow:visible;
-  text-wrap:balance;
-}
-
-@media (max-width:700px){
-  .project-visual--management .management-preview--logo{
-    gap:14px;
-    padding:20px 14px;
+  .project-logo-hero{
+    gap:13px;
+    padding:18px 14px 20px;
   }
 
-  .project-visual--management .management-preview--logo img{
-    max-width:78% !important;
-    max-height:58% !important;
+  .project-logo-hero img{
+    max-width:72%;
+    max-height:56%;
   }
 
-  .management-preview__name{
+  .project-logo-hero--management img{
+    max-width:76%;
+    max-height:58%;
+  }
+
+  .project-logo-hero--nuvkey img{
+    max-width:68%;
+    max-height:56%;
+  }
+
+  .project-logo-hero__name{
     font-size:19px;
   }
 }
