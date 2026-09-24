@@ -11,7 +11,7 @@ const isLarissa = project.slug === 'larissa-souza'
 const isJazi = project.slug === 'studio-jazi-lino'
 const isParking = project.slug === 'unicesumar-parking'
 const isManagement = project.slug === 'sistema-de-gestao'
-const isKeyDeck = project.slug === 'keydeck'
+const isNuvkey = project.slug === 'nuvkey'
 const isDevelopment = project.status === 'development'
 const statusLabel = isDevelopment
   ? 'Em desenvolvimento'
@@ -39,6 +39,10 @@ const techMarks: Record<string, string> = {
   Docker: 'D',
   Python: 'Py',
   Cloudflare: 'CF',
+  'C#': 'C#',
+  '.NET 10': '.NET',
+  WPF: 'WPF',
+  'Windows API': 'WIN',
 }
 
 const techIcons: Record<string, string> = {
@@ -56,6 +60,9 @@ const techIcons: Record<string, string> = {
   Docker: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg',
   Python: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg',
   Cloudflare: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cloudflare/cloudflare-original.svg',
+  'C#': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg',
+  '.NET 10': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dotnetcore/dotnetcore-original.svg',
+  'Windows API': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/windows11/windows11-original.svg',
 }
 
 const techKey = (tech: string) =>
@@ -69,7 +76,7 @@ const techKey = (tech: string) =>
       'project-card--jazi': isJazi,
       'project-card--parking': isParking,
       'project-card--management': isManagement,
-      'project-card--keydeck': isKeyDeck,
+      'project-card--nuvkey': isNuvkey,
       'project-card--development': isDevelopment,
     },
   ]}
@@ -83,7 +90,7 @@ const techKey = (tech: string) =>
         'project-visual--jazi': isJazi,
         'project-visual--parking': isParking,
         'project-visual--management': isManagement,
-        'project-visual--keydeck': isKeyDeck,
+        'project-visual--nuvkey': isNuvkey,
       },
     ]}
     href={primaryUrl}
@@ -100,11 +107,11 @@ const techKey = (tech: string) =>
           decoding="async"
         />
       </div>
-    ) : isKeyDeck ? (
-      <div class="keydeck-preview">
+    ) : isNuvkey ? (
+      <div class="nuvkey-preview">
         <img
-          src="/projects/keydeck/logo.webp"
-          alt="Logo KeyDeck"
+          src="/projects/nuvkey/logo.png"
+          alt="Logo Nuvkey"
           loading="lazy"
           decoding="async"
         />
