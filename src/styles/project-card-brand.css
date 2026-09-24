@@ -189,21 +189,21 @@
 }
 
 
-/* KeyDeck — projeto em desenvolvimento */
-.project-card--keydeck{
+/* Nuvkey — projeto em desenvolvimento */
+.project-card--nuvkey{
   background:
     radial-gradient(circle at 100% 0%, rgba(0,194,255,.08), transparent 36%),
     var(--surface);
 }
 
-.project-visual--keydeck{
+.project-visual--nuvkey{
   border-color:#1e3955;
   background:
     radial-gradient(circle at 50% 44%, rgba(0,194,255,.11), transparent 46%),
     linear-gradient(145deg,#08111b,#050a10);
 }
 
-.keydeck-preview{
+.nuvkey-preview{
   position:absolute;
   inset:0;
   display:grid;
@@ -211,7 +211,7 @@
   padding:28px 20px;
 }
 
-.keydeck-preview img{
+.nuvkey-preview img{
   width:100%;
   height:100%;
   max-width:94%;
@@ -223,7 +223,7 @@
   transition:transform .3s ease, filter .3s ease;
 }
 
-.project-card--keydeck:hover .keydeck-preview img{
+.project-card--nuvkey:hover .nuvkey-preview img{
   transform:scale(1.025);
   filter:drop-shadow(0 12px 28px rgba(0,157,255,.20));
 }
@@ -250,10 +250,10 @@
 }
 
 @media (max-width:700px){
-  .keydeck-preview{
+  .nuvkey-preview{
     padding:22px 16px;
   }
-  .keydeck-preview img{
+  .nuvkey-preview img{
     max-width:90%;
     max-height:76%;
   }
