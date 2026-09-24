@@ -267,8 +267,8 @@
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:14px;
-  padding:22px 18px 24px;
+  gap:18px;
+  padding:24px 16px;
   background:#000 !important;
   overflow:hidden;
 }
@@ -276,8 +276,8 @@
 .project-visual--management .management-preview--logo img{
   width:auto;
   height:auto;
-  max-width:70% !important;
-  max-height:64% !important;
+  max-width:82% !important;
+  max-height:60% !important;
   display:block;
   object-fit:contain;
   object-position:center;
@@ -292,29 +292,33 @@
 
 .management-preview__name{
   display:block;
+  width:100%;
   max-width:100%;
   margin:0;
+  padding:0 4px;
   color:#fff;
-  font-size:24px;
+  font-size:20px;
   font-weight:800;
-  line-height:1.05;
-  letter-spacing:-.035em;
+  line-height:1.08;
+  letter-spacing:-.025em;
   text-align:center;
-  white-space:nowrap;
+  white-space:normal;
+  overflow:visible;
+  text-wrap:balance;
 }
 
 @media (max-width:700px){
   .project-visual--management .management-preview--logo{
-    gap:12px;
-    padding:18px 16px 20px;
+    gap:14px;
+    padding:20px 14px;
   }
 
   .project-visual--management .management-preview--logo img{
-    max-width:66% !important;
-    max-height:62% !important;
+    max-width:78% !important;
+    max-height:58% !important;
   }
 
   .management-preview__name{
-    font-size:22px;
+    font-size:19px;
   }
 }
