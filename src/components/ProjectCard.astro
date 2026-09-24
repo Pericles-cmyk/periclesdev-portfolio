@@ -99,23 +99,24 @@ const techKey = (tech: string) =>
     aria-label={`Abrir ${project.title}`}
   >
     {isManagement ? (
-      <div class="management-preview management-preview--logo">
+      <div class="project-logo-hero project-logo-hero--management">
         <img
           src="/projects/sistema-gestao/logo.svg"
           alt=""
           loading="lazy"
           decoding="async"
         />
-        <strong class="management-preview__name">Sistema de Gestão</strong>
+        <strong class="project-logo-hero__name">Sistema de Gestão</strong>
       </div>
     ) : isNuvkey ? (
-      <div class="nuvkey-preview">
+      <div class="project-logo-hero project-logo-hero--nuvkey">
         <img
-          src="/projects/nuvkey/nuvkey-splash.png"
-          alt="Nuvkey — uma solução PericlesDev"
+          src="/projects/nuvkey/icon.svg"
+          alt=""
           loading="lazy"
           decoding="async"
         />
+        <strong class="project-logo-hero__name">Nuvkey</strong>
       </div>
     ) : isLarissa ? (
       <div class="larissa-preview">
