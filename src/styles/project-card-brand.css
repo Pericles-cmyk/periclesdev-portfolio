@@ -257,3 +257,64 @@
     height:100%;
   }
 }
+
+
+/* Sistema de Gestão — padrão de apresentação dos cards */
+.project-visual--management .management-preview--logo{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  padding:22px 18px 24px;
+  background:#000 !important;
+  overflow:hidden;
+}
+
+.project-visual--management .management-preview--logo img{
+  width:auto;
+  height:auto;
+  max-width:70% !important;
+  max-height:64% !important;
+  display:block;
+  object-fit:contain;
+  object-position:center;
+  filter:none !important;
+  transform:none !important;
+}
+
+.project-card--management:hover .management-preview--logo img{
+  transform:none !important;
+  filter:none !important;
+}
+
+.management-preview__name{
+  display:block;
+  max-width:100%;
+  margin:0;
+  color:#fff;
+  font-size:24px;
+  font-weight:800;
+  line-height:1.05;
+  letter-spacing:-.035em;
+  text-align:center;
+  white-space:nowrap;
+}
+
+@media (max-width:700px){
+  .project-visual--management .management-preview--logo{
+    gap:12px;
+    padding:18px 16px 20px;
+  }
+
+  .project-visual--management .management-preview--logo img{
+    max-width:66% !important;
+    max-height:62% !important;
+  }
+
+  .management-preview__name{
+    font-size:22px;
+  }
+}
