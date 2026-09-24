@@ -34,6 +34,16 @@ Os projetos comerciais aparecem como cases visuais sem expor o código-fonte:
 
 Screenshots aprovados podem ser adicionados em `public/projects/`.
 
+## Padrão de manutenção
+
+As regras permanentes para adicionar e atualizar projetos — incluindo o padrão obrigatório de logos e previews dos cards — estão em:
+
+```text
+AGENTS.md
+```
+
+Ao incluir um novo projeto, essas regras devem ser consultadas antes de alterar os cards.
+
 ## Desenvolvimento
 
 ```bash
