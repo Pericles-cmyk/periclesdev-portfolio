@@ -51,6 +51,37 @@ card
 
 Uma logo transparente só pode ser usada diretamente se estiver comprovadamente legível sobre o fundo do preview sem perda de contraste ou definição.
 
+### Padrão oficial quando o projeto tiver apenas a logo
+
+Quando um projeto não possuir screenshot, splash ou banner oficial adequado e tiver apenas a logo, o card deve seguir obrigatoriamente o padrão visual aprovado nos projetos **Nuvkey** e **Sistema de Gestão**:
+
+- usar o preview esquerdo em estilo **hero/full-bleed**;
+- preencher toda a área visual disponível, sem criar um “quadro dentro do quadro”;
+- usar fundo sólido escuro/preto, integrado ao restante do card;
+- exibir a logo grande, centralizada e com boa área de respiro;
+- exibir o nome do projeto em branco dentro do preview;
+- preservar integralmente proporções, cores e identidade da marca;
+- nunca esticar, deformar ou ampliar uma imagem de baixa resolução;
+- evitar blur, compressão excessiva, serrilhado e perda de contraste;
+- preferir texto do nome renderizado em HTML/CSS quando isso melhorar a nitidez;
+- manter o mesmo padrão de alinhamento, proporção e hierarquia visual entre os cards;
+- validar o resultado em desktop e mobile antes de considerar concluído.
+
+A referência visual para esse tipo de card é:
+
+```text
+┌────────────────────────┐
+│                        │
+│      LOGO GRANDE       │
+│      CENTRALIZADA      │
+│                        │
+│    Nome do Projeto     │
+│        em branco       │
+└────────────────────────┘
+```
+
+Se posteriormente o projeto passar a ter uma splash/banner oficial de melhor qualidade, ela pode substituir o preview criado, desde que mantenha a mesma linguagem visual do portfólio.
+
 ## Padrão de status
 
 Projetos em desenvolvimento:
