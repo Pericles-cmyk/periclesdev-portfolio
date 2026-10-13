@@ -39,6 +39,19 @@ export const privateCases: PortfolioProject[] = [
     featured: true,
   },
   {
+    slug: 'estoque-web',
+    title: 'Estoque Web',
+    subtitle: 'Controle de estoque responsivo',
+    description:
+      'Sistema web mobile-first para cadastro e consulta de produtos, entradas e saídas, histórico de movimentações, alertas de estoque baixo e pesquisa por código de barras.',
+    stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Drizzle ORM', 'Neon'],
+    category: 'Sistema de gestão',
+    kind: 'private',
+    status: 'development',
+    hideActions: true,
+    featured: true,
+  },
+  {
     slug: 'larissa-souza',
     title: 'Larissa Souza | Sobrancelhas BP',
     subtitle: 'Site e fluxo de agendamento',
