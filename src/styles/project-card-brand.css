@@ -309,3 +309,32 @@
     font-size:19px;
   }
 }
+
+
+/* Estoque Web — hero de apresentação alinhado ao padrão Nuvkey */
+.project-card--inventory{
+  background: radial-gradient(circle at 100% 0%, rgba(55,215,165,.08), transparent 36%), var(--surface);
+}
+.project-visual--inventory{
+  border-color:#1e3955;
+  background:#08111b;
+}
+.project-logo-hero--inventory{
+  background: radial-gradient(circle at 50% 42%, rgba(55,215,165,.10), transparent 44%), #08111b;
+}
+.project-logo-hero--inventory img{
+  max-width:66%;
+  max-height:58%;
+}
+.project-card--inventory .project-logo-hero__name{
+  letter-spacing:-.02em;
+}
+.project-card--inventory .project-logo-hero__name::after{
+  content:"CONTROLE DE ESTOQUE";
+  display:block;
+  margin-top:8px;
+  color:#65d9bb;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:.18em;
+}
