@@ -13,6 +13,7 @@ const isParking = project.slug === 'unicesumar-parking'
 const isManagement = project.slug === 'sistema-de-gestao'
 const isNuvkey = project.slug === 'nuvkey'
 const isInventory = project.slug === 'estoque-web'
+const isLojaExuberante = project.slug === 'loja-exuberante'
 const isDevelopment = project.status === 'development'
 const statusLabel = isDevelopment
   ? 'Em desenvolvimento'
@@ -79,6 +80,7 @@ const techKey = (tech: string) =>
       'project-card--management': isManagement,
       'project-card--nuvkey': isNuvkey,
       'project-card--inventory': isInventory,
+      'project-card--loja-exuberante': isLojaExuberante,
       'project-card--development': isDevelopment,
     },
   ]}
@@ -94,6 +96,7 @@ const techKey = (tech: string) =>
         'project-visual--management': isManagement,
         'project-visual--nuvkey': isNuvkey,
         'project-visual--inventory': isInventory,
+        'project-visual--loja-exuberante': isLojaExuberante,
       },
     ]}
     href={primaryUrl}
@@ -125,6 +128,11 @@ const techKey = (tech: string) =>
       <div class="project-logo-hero project-logo-hero--inventory">
         <img src="/projects/estoque-web/icon.svg" alt="" loading="lazy" decoding="async" />
         <strong class="project-logo-hero__name">Estoque Web</strong>
+      </div>
+    ) : isLojaExuberante ? (
+      <div class="project-logo-hero project-logo-hero--loja-exuberante">
+        <img src="/projects/loja-exuberante/icon.svg" alt="" loading="lazy" decoding="async" />
+        <strong class="project-logo-hero__name">Loja Exuberante</strong>
       </div>
     ) : isLarissa ? (
       <div class="larissa-preview">
