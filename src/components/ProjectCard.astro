@@ -12,6 +12,7 @@ const isJazi = project.slug === 'studio-jazi-lino'
 const isParking = project.slug === 'unicesumar-parking'
 const isManagement = project.slug === 'sistema-de-gestao'
 const isNuvkey = project.slug === 'nuvkey'
+const isInventory = project.slug === 'estoque-web'
 const isDevelopment = project.status === 'development'
 const statusLabel = isDevelopment
   ? 'Em desenvolvimento'
@@ -77,6 +78,7 @@ const techKey = (tech: string) =>
       'project-card--parking': isParking,
       'project-card--management': isManagement,
       'project-card--nuvkey': isNuvkey,
+      'project-card--inventory': isInventory,
       'project-card--development': isDevelopment,
     },
   ]}
@@ -91,6 +93,7 @@ const techKey = (tech: string) =>
         'project-visual--parking': isParking,
         'project-visual--management': isManagement,
         'project-visual--nuvkey': isNuvkey,
+        'project-visual--inventory': isInventory,
       },
     ]}
     href={primaryUrl}
@@ -117,6 +120,11 @@ const techKey = (tech: string) =>
           decoding="async"
         />
         <strong class="project-logo-hero__name">Nuvkey</strong>
+      </div>
+    ) : isInventory ? (
+      <div class="project-logo-hero project-logo-hero--inventory">
+        <img src="/projects/estoque-web/icon.svg" alt="" loading="lazy" decoding="async" />
+        <strong class="project-logo-hero__name">Estoque Web</strong>
       </div>
     ) : isLarissa ? (
       <div class="larissa-preview">
