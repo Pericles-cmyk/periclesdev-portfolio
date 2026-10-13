@@ -52,6 +52,19 @@ export const privateCases: PortfolioProject[] = [
     featured: true,
   },
   {
+    slug: 'loja-exuberante',
+    title: 'Loja Exuberante',
+    subtitle: 'Loja virtual com pedidos pelo WhatsApp',
+    description:
+      'E-commerce responsivo com catálogo por categorias, carrinho de compras, cadastro rápido do cliente e finalização do pedido pelo WhatsApp. Área administrativa para gerenciar produtos, imagens, pedidos e estoque.',
+    stack: ['Next.js', 'TypeScript', 'Supabase', 'PostgreSQL', 'Supabase Storage'],
+    category: 'E-commerce',
+    kind: 'private',
+    status: 'development',
+    hideActions: true,
+    featured: true,
+  },
+  {
     slug: 'larissa-souza',
     title: 'Larissa Souza | Sobrancelhas BP',
     subtitle: 'Site e fluxo de agendamento',
