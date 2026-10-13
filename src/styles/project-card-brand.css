@@ -338,3 +338,36 @@
   font-weight:700;
   letter-spacing:.18em;
 }
+
+
+/* Loja Exuberante — identidade rosa elegante no padrão dos projetos em desenvolvimento */
+.project-card--loja-exuberante{
+  background:
+    radial-gradient(circle at 100% 0%, rgba(244,91,167,.10), transparent 38%),
+    var(--surface);
+}
+.project-visual--loja-exuberante{
+  border-color:#51233f;
+  background:#100b13;
+}
+.project-logo-hero--loja-exuberante{
+  background:
+    radial-gradient(circle at 50% 42%, rgba(244,91,167,.14), transparent 46%),
+    #100b13;
+}
+.project-logo-hero--loja-exuberante img{
+  max-width:66%;
+  max-height:58%;
+}
+.project-card--loja-exuberante .project-logo-hero__name{
+  letter-spacing:-.025em;
+}
+.project-card--loja-exuberante .project-logo-hero__name::after{
+  content:"E-COMMERCE • PEDIDOS PELO WHATSAPP";
+  display:block;
+  margin-top:8px;
+  color:#f49bc5;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:.12em;
+}
